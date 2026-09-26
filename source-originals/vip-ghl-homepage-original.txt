@@ -1,0 +1,8334 @@
+<style>
+/* FIRST-PAINT FIX: CSS loads before any VIP markup so GHL cannot flash unstyled content. */
+html, body { margin: 0; padding: 0; }
+
+
+/* =========================================================
+   GLOBAL / GHL RESET
+========================================================= */
+
+html,
+body {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth;
+  background: #fff !important;
+}
+
+
+body:has(#vip-pro) .hl_page-preview--content,
+body:has(#vip-pro) .hl_page-preview--content-inner,
+body:has(#vip-pro) .fullSection,
+body:has(#vip-pro) .c-section,
+body:has(#vip-pro) .c-row,
+body:has(#vip-pro) .c-column,
+body:has(#vip-pro) .inner {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+#vip-pro,
+#vip-pro * {
+  box-sizing: border-box;
+}
+
+
+#vip-pro {
+
+  --navy: #341B55;
+  --navy-deep: #25103F;
+  --navy-black: #160823;
+
+  --green: #D4AF37;
+  --green-dark: #B68A19;
+
+  --white: #ffffff;
+  --off-white: #f4f5f6;
+
+  --dark: #303039;
+  --text: #3c3c44;
+  --gray: #68686f;
+
+  width: 100%;
+  overflow: hidden;
+
+  color: var(--text);
+  background: #fff;
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+}
+
+
+#vip-pro h1,
+#vip-pro h2,
+#vip-pro h3,
+#vip-pro h4,
+#vip-pro p {
+  margin-top: 0;
+}
+
+
+#vip-pro a {
+  text-decoration: none;
+}
+
+
+#vip-pro img {
+  display: block;
+  max-width: 100%;
+}
+
+
+.fp-shell {
+  width: min(1440px, calc(100% - 50px));
+  margin: 0 auto;
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.fp-header {
+  position: absolute;
+  z-index: 999;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  transition:
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.fp-header.fp-sticky {
+  position: fixed;
+
+  background: rgba(37,16,63,.95);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom:
+    1px solid rgba(212,175,55,.60);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.18);
+}
+
+
+.fp-header-inner {
+  width: min(1540px, calc(100% - 42px));
+
+  min-height: 116px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+}
+
+
+.fp-logo-wrap {
+  width: 225px;
+  flex: 0 0 225px;
+}
+
+
+.fp-logo {
+  width: 100%;
+  max-height: 108px;
+
+  object-fit: contain;
+  object-position: left center;
+
+  filter:
+    drop-shadow(
+      0 5px 13px
+      rgba(0,0,0,.28)
+    );
+}
+
+.fp-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: .86;
+  filter: drop-shadow(0 5px 13px rgba(0,0,0,.28));
+}
+
+.fp-wordmark strong {
+  color: var(--green);
+  font-size: clamp(34px, 3vw, 52px);
+  font-weight: 1000;
+  letter-spacing: -.055em;
+}
+
+.fp-wordmark small {
+  margin-top: 7px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: .32em;
+  white-space: nowrap;
+}
+
+.fp-wordmark-footer strong {
+  font-size: 50px;
+}
+
+
+
+.fp-nav {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+
+  gap:
+    clamp(
+      20px,
+      2.2vw,
+      38px
+    );
+}
+
+
+.fp-nav a {
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.25);
+}
+
+
+.fp-nav a:hover {
+  color: var(--green);
+}
+
+
+.fp-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 82px;
+}
+
+
+.fp-nav-parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.fp-nav-chevron {
+  position: relative;
+  top: -1px;
+  font-size: 15px;
+  line-height: 1;
+  transition: transform .18s ease;
+}
+
+
+.fp-has-dropdown:hover .fp-nav-chevron,
+.fp-has-dropdown:focus-within .fp-nav-chevron {
+  transform: rotate(180deg);
+}
+
+
+.fp-dropdown {
+  position: absolute;
+  top: calc(100% - 5px);
+  left: 50%;
+  z-index: 80;
+
+  width: 330px;
+
+  padding: 9px;
+
+  border: 1px solid rgba(255,255,255,.13);
+  border-top: 3px solid var(--green);
+  border-radius: 0 0 9px 9px;
+
+  background: rgba(22,8,35,.985);
+
+  box-shadow: 0 18px 45px rgba(0,0,0,.28);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translate(-50%,10px);
+
+  transition:
+    opacity .16s ease,
+    transform .16s ease,
+    visibility .16s ease;
+}
+
+
+.fp-has-dropdown:hover .fp-dropdown,
+.fp-has-dropdown:focus-within .fp-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%,0);
+}
+
+
+.fp-dropdown a {
+  display: block;
+
+  padding: 13px 14px;
+
+  border-radius: 5px;
+
+  color: #fff;
+  text-shadow: none;
+  white-space: normal;
+
+  transition:
+    background .16s ease,
+    color .16s ease;
+}
+
+
+.fp-dropdown a:hover,
+.fp-dropdown a:focus {
+  background: rgba(212,175,55,.13);
+  color: #fff;
+}
+
+
+.fp-dropdown strong,
+.fp-dropdown span {
+  display: block;
+}
+
+
+.fp-dropdown strong {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+
+.fp-dropdown span {
+  margin-top: 4px;
+  color: rgba(255,255,255,.65);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+.fp-dropdown-compact {
+  width: 270px;
+}
+
+
+.fp-dropdown-compact a {
+  padding: 11px 13px;
+}
+
+
+.fp-header-cta {
+  min-width: 200px;
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 12px;
+  padding: 0 22px;
+
+  border: 1px solid #fff;
+  border-radius: 5px;
+
+  background: var(--green-dark);
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+
+.fp-header-cta:hover {
+  transform: translateY(-2px);
+  background: #E2C15A;
+}
+
+
+.fp-mobile-btn {
+  display: none;
+
+  width: 46px;
+  height: 46px;
+
+  padding: 10px;
+
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 4px;
+
+  background: rgba(0,0,0,.15);
+
+  cursor: pointer;
+}
+
+
+.fp-mobile-btn span {
+  display: block;
+
+  width: 100%;
+  height: 2px;
+
+  margin: 5px 0;
+
+  background: #fff;
+}
+
+
+.fp-mobile-menu {
+  display: none;
+}
+
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.fp-hero {
+  position: relative;
+
+  min-height: 845px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background: var(--navy);
+}
+
+
+.fp-hero-photo {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url(
+      "https://junkremovalvip.com/cdn/shop/files/preview_images/bba86ea8b3c14158b0280535085fa555.thumbnail.0000000000.jpg?v=1762658783&width=1920"
+    );
+
+  background-size: cover;
+  background-position: 62% center;
+
+  transform: scale(1.03);
+}
+
+
+.fp-hero-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22,8,35,.98) 0%,
+      rgba(37,16,63,.91) 31%,
+      rgba(52,27,85,.61) 56%,
+      rgba(22,8,35,.27) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(22,8,35,.35) 0%,
+      transparent 40%,
+      rgba(22,8,35,.42) 100%
+    );
+}
+
+
+.fp-hero-content {
+  position: relative;
+  z-index: 3;
+
+  padding-top: 115px;
+}
+
+
+.fp-hero-left {
+  max-width: 760px;
+}
+
+
+.fp-hero-kicker {
+  margin-bottom: 10px;
+
+  color: #fff;
+
+  font-size:
+    clamp(
+      14px,
+      1.3vw,
+      20px
+    );
+
+  line-height: 1.3;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+.fp-hero-kicker span {
+  color: var(--green);
+}
+
+
+.fp-hero h1 {
+  margin-bottom: 20px;
+
+  color: #fff;
+
+  font-family:
+    "Anton",
+    sans-serif;
+
+  font-size:
+    clamp(
+      87px,
+      9vw,
+      150px
+    );
+
+  line-height: .89;
+  font-weight: 400;
+  letter-spacing: -.025em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 5px 0 rgba(0,0,0,.25),
+    0 10px 20px rgba(0,0,0,.18);
+}
+
+
+.fp-hero-desc {
+  max-width: 630px;
+
+  margin-bottom: 28px;
+
+  color: rgba(255,255,255,.93);
+
+  font-size:
+    clamp(
+      15px,
+      1.35vw,
+      19px
+    );
+
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+
+.fp-hero-actions,
+.fp-pricing-buttons,
+.fp-ba-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+
+.fp-green-btn {
+  min-height: 56px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 29px;
+
+  border: 1px solid #fff;
+  border-radius: 5px;
+
+  background: var(--green-dark);
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+
+.fp-green-btn:hover {
+  transform: translateY(-2px);
+  background: #E2C15A;
+}
+
+
+.fp-outline-btn {
+  min-height: 56px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 0 27px;
+
+  border: 2px solid var(--green);
+  border-radius: 5px;
+
+  background: rgba(37,16,63,.63);
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 900;
+}
+
+
+
+/* =========================================================
+   REVIEWS
+========================================================= */
+
+.fp-reviews {
+  min-height: 235px;
+
+  display: grid;
+
+  grid-template-columns:
+    300px minmax(0,1fr);
+
+  background: #fff;
+
+  border-bottom: 1px solid #ddd;
+}
+
+
+.fp-review-score {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  border-right: 1px solid #ddd;
+
+  text-align: center;
+}
+
+
+.fp-review-score strong {
+  margin-bottom: 7px;
+
+  color: #111;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+
+.fp-review-stars {
+  color: #f5b000;
+
+  font-size: 33px;
+  letter-spacing: -3px;
+}
+
+
+.fp-review-score p {
+  margin: 3px 0 6px;
+
+  color: #222;
+
+  font-size: 12px;
+}
+
+
+.fp-google {
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+
+
+.google-blue {
+  color: #4285f4;
+}
+
+
+.google-red {
+  color: #ea4335;
+}
+
+
+.google-yellow {
+  color: #fbbc05;
+}
+
+
+.google-green {
+  color: #34a853;
+}
+
+
+.fp-review-window {
+  overflow: hidden;
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      black 4%,
+      black 96%,
+      transparent
+    );
+}
+
+
+.fp-review-track {
+  width: max-content;
+
+  display: flex;
+
+  animation:
+    fpReviews 39s linear infinite;
+}
+
+
+.fp-review-window:hover .fp-review-track {
+  animation-play-state: paused;
+}
+
+
+.fp-review-card {
+  width: 350px;
+  flex: 0 0 350px;
+
+  padding: 32px 27px;
+
+  border-right: 1px solid #e2e2e2;
+}
+
+
+.fp-review-card-top {
+  display: grid;
+
+  grid-template-columns:
+    40px 1fr 22px;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.fp-review-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #B68A19;
+
+  color: #fff;
+
+  font-size: 16px;
+}
+
+
+.fp-purple {
+  background: #D4AF37;
+}
+
+
+.fp-brown {
+  background: #341B55;
+}
+
+
+.fp-green {
+  background: #166534;
+}
+
+
+.fp-review-person strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #111;
+
+  font-size: 12px;
+}
+
+
+.fp-review-person span {
+  color: #888;
+  font-size: 10px;
+}
+
+
+.fp-g-icon {
+  color: #4285f4;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+
+.fp-small-stars {
+  margin: 11px 0 6px;
+
+  color: #f5b000;
+
+  font-size: 17px;
+}
+
+
+.fp-review-card p {
+  margin: 0;
+
+  color: #202020;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+@keyframes fpReviews {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+
+}
+
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.fp-about {
+  padding: 100px 0 70px;
+  background: #f3f4f6;
+}
+
+
+.fp-about-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+
+  gap: 75px;
+
+  align-items: center;
+}
+
+
+.fp-about-visual {
+  position: relative;
+}
+
+
+.fp-about-photo {
+  height: 530px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.11);
+}
+
+
+.fp-about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.fp-about-badge {
+  position: absolute;
+
+  right: -25px;
+  top: -25px;
+
+  width: 150px;
+  height: 150px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 6px solid #f3f4f6;
+  border-radius: 50%;
+
+  background: var(--green);
+  color: var(--navy-black);
+
+  text-align: center;
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.13);
+}
+
+
+.fp-about-badge strong {
+  font-family: "Anton", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+
+.fp-about-badge span {
+  margin-top: 3px;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+
+.fp-about-copy h2 {
+  margin-bottom: 24px;
+
+  color: #303039;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      44px,
+      4.8vw,
+      70px
+    );
+
+  line-height: 1;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-about-copy h2 span {
+  display: block;
+  color: var(--navy);
+}
+
+
+.fp-about-copy p {
+  margin-bottom: 17px;
+
+  color: #424249;
+
+  font-size:
+    clamp(
+      15px,
+      1.25vw,
+      18px
+    );
+
+  line-height: 1.55;
+}
+
+
+.fp-text-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 7px;
+  padding-bottom: 4px;
+
+  border-bottom:
+    3px solid var(--green);
+
+  color: var(--navy);
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.fp-about-bottom {
+  margin-top: 43px;
+  text-align: center;
+}
+
+
+.fp-about-bottom p {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  color: #505058;
+
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+
+
+/* =========================================================
+   SHARED HEADINGS
+========================================================= */
+
+.fp-heading {
+  max-width: 1100px;
+
+  margin: 0 auto 54px;
+
+  text-align: center;
+}
+
+
+.fp-heading h2 {
+  margin-bottom: 14px;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      44px,
+      4.6vw,
+      68px
+    );
+
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+
+.fp-heading-dark h2 {
+  color: #fff;
+}
+
+
+.fp-heading-dark h2 span {
+  color: var(--green);
+}
+
+
+.fp-heading p {
+  margin: 0;
+
+  color: rgba(255,255,255,.87);
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+
+
+/* =========================================================
+   POPULAR
+========================================================= */
+
+.fp-popular {
+  padding: 70px 0 80px;
+  background: var(--navy);
+}
+
+
+.fp-icon-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap: 22px;
+}
+
+
+.fp-icon-service {
+  min-height: 190px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+
+  text-align: center;
+}
+
+
+.fp-line-icon {
+  width: 105px;
+  height: 105px;
+
+  margin-bottom: 15px;
+}
+
+
+.fp-line-icon svg {
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+  stroke: #fff;
+
+  stroke-width: 3;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+.fp-icon-service strong {
+  color: #fff;
+
+  font-size: 12px;
+  line-height: 1.22;
+}
+
+
+
+/* =========================================================
+   TRUST
+========================================================= */
+
+.fp-trust {
+  padding: 38px 0;
+  background: #fff;
+}
+
+
+.fp-trust-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap: 25px;
+}
+
+
+.fp-trust-item {
+  min-height: 100px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+}
+
+
+.fp-trust-shape {
+  width: 68px;
+  height: 68px;
+
+  flex: 0 0 68px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    4px solid var(--green-dark);
+
+  border-radius: 50%;
+
+  color: var(--green-dark);
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.fp-trust-copy strong,
+.fp-trust-copy span {
+  display: block;
+}
+
+
+.fp-trust-copy strong {
+  color: #34343a;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+.fp-trust-copy span {
+  margin-top: 3px;
+
+  color: #7b7b80;
+
+  font-size: 8px;
+  font-weight: 800;
+}
+
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.fp-help {
+  position: relative;
+
+  padding: 65px 0 85px;
+
+  overflow: hidden;
+}
+
+
+.fp-help-photo {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url(
+      "https://junkremovalvip.com/cdn/shop/files/IMG_0026.heic?v=1762655716&width=1800&format=pjpg"
+    );
+
+  background-size: cover;
+  background-position: center;
+}
+
+
+.fp-help-shade {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(37,16,63,.87);
+}
+
+
+.fp-help-inner {
+  position: relative;
+  z-index: 2;
+}
+
+
+.fp-help-heading {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+
+.fp-help-heading p {
+  margin-bottom: 6px;
+
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .22em;
+}
+
+
+.fp-help-heading h2 {
+  margin-bottom: 17px;
+
+  color: #fff;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      46px,
+      4.7vw,
+      70px
+    );
+
+  line-height: 1;
+  font-weight: 400;
+}
+
+
+.fp-help-heading span {
+  display: block;
+
+  width: 54px;
+  height: 3px;
+
+  margin: 0 auto;
+
+  background: var(--green);
+}
+
+
+.fp-help-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap: 30px;
+}
+
+
+.fp-help-card {
+  position: relative;
+
+  min-height: 380px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: stretch;
+  justify-content: flex-end;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border:
+    3px solid var(--green);
+
+  border-radius: 10px;
+
+  background: rgba(37,16,63,.93);
+
+  text-align: left;
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+
+.fp-help-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 38px rgba(0,0,0,.22);
+}
+
+
+.fp-help-image {
+  position: absolute;
+  inset: 0;
+}
+
+
+.fp-help-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform .35s ease;
+}
+
+
+.fp-help-card:hover .fp-help-image img {
+  transform: scale(1.05);
+}
+
+
+.fp-help-card-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(22,8,35,.10) 0%,
+      rgba(22,8,35,.28) 34%,
+      rgba(22,8,35,.94) 100%
+    );
+}
+
+
+.fp-help-card-content {
+  position: relative;
+  z-index: 2;
+
+  padding: 28px 24px 23px;
+}
+
+
+.fp-help-card h3 {
+  margin: 0 0 10px;
+
+  color: #fff;
+
+  font-size:
+    clamp(
+      19px,
+      1.8vw,
+      26px
+    );
+
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+
+.fp-help-card p {
+  margin: 0;
+
+  color: rgba(255,255,255,.92);
+
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+
+.fp-help-learn {
+  display: inline-block;
+  margin-top: 15px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .03em;
+}
+
+
+
+/* =========================================================
+   LOCAL
+========================================================= */
+
+.fp-local {
+  padding: 90px 0;
+  background: #f4f5f7;
+}
+
+
+.fp-local-grid {
+  display: grid;
+
+  grid-template-columns:
+    .9fr 1.1fr;
+
+  gap: 65px;
+
+  align-items: center;
+}
+
+
+.fp-mini-title {
+  margin-bottom: 10px;
+
+  color: #3b3b42;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  letter-spacing: .05em;
+}
+
+
+.fp-local-copy h2 {
+  margin-bottom: 24px;
+
+  color: #303039;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      54px,
+      5.6vw,
+      82px
+    );
+
+  line-height: .92;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-local-copy h2 span {
+  color: var(--green-dark);
+}
+
+
+.fp-local-copy > p {
+  margin-bottom: 15px;
+
+  color: #494951;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+.fp-local-checks {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 13px;
+
+  margin: 25px 0 27px;
+}
+
+
+.fp-local-checks div {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #35353c;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+.fp-local-checks span {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--green);
+  color: var(--navy-black);
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+.fp-local-photo {
+  height: 570px;
+  overflow: hidden;
+}
+
+
+.fp-local-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+
+
+/* =========================================================
+   PRICING
+========================================================= */
+
+.fp-pricing {
+  padding: 75px 0 95px;
+  background: var(--navy);
+}
+
+
+.fp-pricing-head {
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+.fp-pricing-head > p {
+  margin-bottom: 10px;
+
+  color: var(--green);
+
+  font-size: 15px;
+  font-weight: 900;
+}
+
+
+.fp-pricing-head h2 {
+  margin-bottom: 19px;
+
+  color: #fff;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      70px,
+      8vw,
+      120px
+    );
+
+  line-height: .9;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-pricing-head h2 span {
+  display: block;
+}
+
+
+.fp-price-note {
+  margin-bottom: 25px;
+
+  color: var(--green);
+
+  font-size: 21px;
+  font-weight: 900;
+}
+
+
+.fp-pricing-buttons {
+  justify-content: center;
+}
+
+
+
+/* =========================================================
+   PRICING FACTORS
+========================================================= */
+
+.fp-price-factors {
+  padding: 85px 0 55px;
+  background: #fff;
+}
+
+
+.fp-price-heading {
+  max-width: 1000px;
+
+  margin: 0 auto 55px;
+
+  text-align: center;
+}
+
+
+.fp-price-heading h2 {
+  margin-bottom: 22px;
+
+  color: #303039;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      44px,
+      4.4vw,
+      65px
+    );
+
+  line-height: 1;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-price-heading p {
+  max-width: 940px;
+
+  margin: 0 auto;
+
+  color: #4e4e56;
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+
+.fp-factor-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap: 40px;
+}
+
+
+.fp-factor {
+  min-height: 390px;
+  text-align: center;
+}
+
+
+.fp-factor-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #34343b;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  text-decoration: underline;
+}
+
+
+.fp-factor h3 {
+  margin-bottom: 8px;
+
+  color: #34343b;
+
+  font-family: "Anton", sans-serif;
+
+  font-size: 42px;
+  line-height: 1;
+
+  font-weight: 400;
+}
+
+
+.fp-factor p {
+  margin-bottom: 15px;
+
+  color: var(--green-dark);
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+
+.fp-factor-art {
+  height: 190px;
+}
+
+
+.fp-factor-art svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+.fp-art-dark {
+  fill: #34343b;
+}
+
+
+.fp-art-green {
+  fill: #D4AF37;
+}
+
+
+.fp-art-stroke {
+  stroke: #34343b;
+
+  stroke-width: 7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  fill: none;
+}
+
+
+
+/* =========================================================
+   BEFORE / AFTER
+========================================================= */
+
+.fp-before-after {
+  padding: 85px 0;
+
+  background: var(--navy);
+}
+
+
+.fp-ba-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 65px;
+
+  align-items: center;
+}
+
+
+.fp-ba-slider {
+  position: relative;
+
+  width: 100%;
+  height: 500px;
+
+  overflow: hidden;
+
+  background: #222;
+
+  isolation: isolate;
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+.fp-ba-after,
+.fp-ba-before {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  max-width: none !important;
+
+  object-fit: cover;
+  object-position: center center;
+
+  transform: none !important;
+  transition: none !important;
+
+  pointer-events: none;
+}
+
+
+.fp-ba-after {
+  z-index: 1;
+}
+
+
+.fp-ba-before {
+  z-index: 2;
+
+  clip-path:
+    inset(0 50% 0 0);
+
+  -webkit-clip-path:
+    inset(0 50% 0 0);
+}
+
+
+.fp-ba-line {
+  position: absolute;
+
+  z-index: 4;
+
+  top: 0;
+  bottom: 0;
+
+  left: 50%;
+
+  width: 3px;
+
+  background: #fff;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+}
+
+
+.fp-ba-handle {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  transform:
+    translate(-50%,-50%);
+
+  border: 4px solid #fff;
+  border-radius: 50%;
+
+  background: #fff;
+  color: var(--navy);
+
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.27);
+}
+
+
+.fp-ba-handle span {
+  color: var(--navy);
+
+  font-family: Arial,sans-serif;
+
+  font-size: 25px;
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+
+.fp-ba-range {
+  position: absolute;
+
+  z-index: 8;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+
+  opacity: 0;
+
+  cursor: ew-resize;
+}
+
+
+.fp-ba-tag {
+  position: absolute;
+
+  z-index: 6;
+
+  bottom: 15px;
+
+  padding: 8px 11px;
+
+  background: rgba(0,0,0,.72);
+  color: #fff;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .08em;
+
+  pointer-events: none;
+}
+
+
+.fp-before-tag {
+  left: 15px;
+}
+
+
+.fp-after-tag {
+  right: 15px;
+}
+
+
+.fp-green-copy {
+  color: var(--green);
+}
+
+
+.fp-ba-content h2 {
+  margin-bottom: 21px;
+
+  color: #fff;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      50px,
+      5vw,
+      76px
+    );
+
+  line-height: .96;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-ba-content h2 span {
+  display: block;
+  color: var(--green);
+}
+
+
+.fp-ba-content > p {
+  max-width: 600px;
+
+  margin-bottom: 27px;
+
+  color: rgba(255,255,255,.88);
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+
+/* =========================================================
+   GOOGLE BUSINESS PROFILE
+========================================================= */
+
+.fp-google-profile {
+  padding: 72px 0;
+  background: #fff;
+}
+
+.fp-google-profile-inner {
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(360px,.85fr);
+  gap: clamp(40px,5vw,80px);
+  align-items: center;
+}
+
+.fp-google-profile-copy h2 {
+  margin: 0 0 18px;
+  color: #303039;
+  font-family: "Anton",sans-serif;
+  font-size: clamp(48px,5vw,76px);
+  line-height: .96;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.fp-google-profile-copy h2 span {
+  display: block;
+  color: var(--green-dark);
+}
+
+.fp-google-profile-copy > p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: #4e4e56;
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+.fp-google-profile-card {
+  padding: 32px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(0,0,0,.08);
+}
+
+.fp-google-profile-brand {
+  margin-bottom: 16px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1;
+}
+
+.fp-google-profile-card > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #24242a;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.fp-google-profile-card > p {
+  margin: 0 0 22px;
+  color: #64646b;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.fp-google-profile-btn {
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0 20px;
+  border: 2px solid var(--green-dark);
+  border-radius: 5px;
+  background: var(--green-dark);
+  color: #fff !important;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.fp-google-profile-btn:hover {
+  transform: translateY(-2px);
+  background: #D4AF37;
+}
+
+.fp-google-profile-btn span {
+  font-size: 17px;
+}
+
+@media (max-width: 820px) {
+  .fp-google-profile {
+    padding: 58px 0;
+  }
+
+  .fp-google-profile-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .fp-google-profile-copy h2 {
+    font-size: clamp(46px,12vw,64px);
+  }
+
+  .fp-google-profile-copy > p:last-child {
+    font-size: 16px;
+  }
+
+  .fp-google-profile-card {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fp-google-profile {
+    padding: 48px 0;
+  }
+
+  .fp-google-profile-copy h2 {
+    font-size: clamp(42px,12.5vw,56px);
+  }
+
+  .fp-google-profile-card > strong {
+    font-size: 18px;
+  }
+
+  .fp-google-profile-btn {
+    min-height: 60px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.fp-final-cta {
+  position: relative;
+
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+
+.fp-final-photo {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url(
+      "https://junkremovalvip.com/cdn/shop/files/IMG_1965.heic?v=1762655709&width=1800&format=pjpg"
+    );
+
+  background-size: cover;
+  background-position: center;
+}
+
+
+.fp-final-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22,8,35,.97),
+      rgba(37,16,63,.86),
+      rgba(52,27,85,.47)
+    );
+}
+
+
+.fp-final-inner {
+  position: relative;
+  z-index: 2;
+}
+
+
+.fp-final-inner > p {
+  margin-bottom: 9px;
+
+  color: var(--green);
+
+  font-size: 15px;
+  font-weight: 900;
+
+  letter-spacing: .1em;
+}
+
+
+.fp-final-inner h2 {
+  max-width: 900px;
+
+  margin-bottom: 27px;
+
+  color: #fff;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      72px,
+      7.5vw,
+      115px
+    );
+
+  line-height: .9;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-final-inner h2 span {
+  display: block;
+  color: var(--green);
+}
+
+
+.fp-big-btn {
+  min-height: 64px;
+
+  padding: 0 36px;
+
+  font-size: 15px;
+}
+
+
+
+/* =========================================================
+   QUIZ SECTION
+========================================================= */
+
+.fp-quiz-section {
+  padding: 95px 0 105px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f4f5f7 0%,
+      #ffffff 100%
+    );
+}
+
+
+.fp-quiz-section-head {
+  max-width: 860px;
+
+  margin: 0 auto 36px;
+
+  text-align: center;
+}
+
+
+.fp-green-text {
+  color: var(--green-dark);
+}
+
+
+.fp-quiz-section-head h2 {
+  margin-bottom: 17px;
+
+  color: #303039;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      58px,
+      6.2vw,
+      92px
+    );
+
+  line-height: .92;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-quiz-section-head h2 span {
+  display: block;
+
+  color: var(--green-dark);
+}
+
+
+.fp-quiz-section-head > p {
+  max-width: 660px;
+
+  margin: 0 auto;
+
+  color: #62626a;
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+
+.fp-quiz-time {
+  width: fit-content;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 16px auto 0;
+
+  color: #65656d;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.fp-quiz-time span {
+  width: 24px;
+  height: 24px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--green);
+  color: var(--navy-black);
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+.fp-quiz-shell {
+  width: min(920px,100%);
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border:
+    9px solid var(--green);
+
+  background: var(--navy);
+
+  box-shadow:
+    0 30px 70px rgba(22,8,35,.15);
+}
+
+
+.fp-quiz-progress {
+  padding: 22px 28px 0;
+}
+
+
+.fp-quiz-progress-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 8px;
+}
+
+
+.fp-quiz-progress-top span {
+  color: rgba(255,255,255,.65);
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+
+.fp-quiz-progress-top strong {
+  color: var(--green);
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .06em;
+}
+
+
+.fp-quiz-progress-track {
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.13);
+}
+
+
+.fp-quiz-progress-fill {
+  width: 16.67%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green-dark),
+      var(--green)
+    );
+
+  box-shadow:
+    0 0 16px rgba(212,175,55,.33);
+
+  transition:
+    width .34s ease;
+}
+
+
+.fp-quiz-screen {
+  display: none;
+
+  padding: 38px 28px 32px;
+
+  color: #fff;
+}
+
+
+.fp-quiz-screen.active {
+  display: block;
+
+  animation:
+    fpQuizEnter .25s ease both;
+}
+
+
+@keyframes fpQuizEnter {
+
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+}
+
+
+.fp-quiz-step-label {
+  margin-bottom: 7px;
+
+  color: var(--green);
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .12em;
+}
+
+
+.fp-quiz-screen > h3 {
+  max-width: 760px;
+
+  margin-bottom: 9px;
+
+  color: #fff;
+
+  font-family: "Anton", sans-serif;
+
+  font-size:
+    clamp(
+      38px,
+      4.3vw,
+      60px
+    );
+
+  line-height: .98;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-quiz-description {
+  max-width: 680px;
+
+  margin-bottom: 0;
+
+  color: rgba(255,255,255,.70);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+.fp-quiz-answer-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+
+.fp-quiz-answer {
+  min-height: 82px;
+
+  display: grid;
+
+  grid-template-columns:
+    47px 1fr 25px;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px;
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  border-radius: 6px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  color: #fff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    background .16s ease;
+}
+
+
+.fp-quiz-answer:hover {
+  transform: translateY(-1px);
+
+  border-color:
+    rgba(212,175,55,.65);
+
+  background:
+    rgba(212,175,55,.08);
+}
+
+
+.fp-quiz-answer.selected {
+  border-color: var(--green);
+
+  background:
+    rgba(212,175,55,.12);
+}
+
+
+.fp-quiz-answer-icon {
+  width: 47px;
+  height: 47px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 4px;
+
+  background: #fff;
+  color: var(--navy);
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+
+.fp-quiz-answer strong {
+  color: #fff;
+
+  font-size: 12px;
+  line-height: 1.28;
+}
+
+
+.fp-quiz-check {
+  width: 24px;
+  height: 24px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid rgba(255,255,255,.28);
+
+  border-radius: 50%;
+
+  color: transparent;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+
+.fp-quiz-answer.selected .fp-quiz-check {
+  border-color: var(--green);
+
+  background: var(--green);
+  color: var(--navy-black);
+}
+
+
+.fp-quiz-bottom-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 21px;
+}
+
+
+.fp-quiz-bottom-row small {
+  color: rgba(255,255,255,.45);
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+.fp-quiz-back {
+  min-height: 40px;
+
+  padding: 0 14px;
+
+  border:
+    1px solid rgba(255,255,255,.2);
+
+  border-radius: 4px;
+
+  background: transparent;
+  color: rgba(255,255,255,.7);
+
+  font-family: "Montserrat",sans-serif;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+.fp-budget-box {
+  margin-top: 25px;
+  padding: 25px;
+
+  border:
+    1px solid rgba(255,255,255,.16);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255,255,255,.055);
+}
+
+
+.fp-budget-result {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 17px;
+}
+
+
+.fp-budget-icon {
+  width: 56px;
+  height: 56px;
+
+  flex: 0 0 56px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 5px;
+
+  background: var(--green);
+  color: var(--navy);
+
+  font-size: 23px;
+}
+
+
+.fp-budget-result small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--green);
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: .1em;
+}
+
+
+.fp-budget-result strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+
+.fp-budget-result p {
+  max-width: 620px;
+
+  margin: 7px 0 0;
+
+  color: rgba(255,255,255,.65);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+.fp-budget-slider-wrap {
+  margin-top: 28px;
+}
+
+
+.fp-budget-slider {
+  --fp-budget-position: 42%;
+
+  width: 100%;
+  height: 8px;
+
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border-radius: 999px;
+
+  outline: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green) 0%,
+      var(--green) var(--fp-budget-position),
+      rgba(255,255,255,.15) var(--fp-budget-position),
+      rgba(255,255,255,.15) 100%
+    );
+
+  cursor: pointer;
+}
+
+
+.fp-budget-slider::-webkit-slider-thumb {
+  width: 31px;
+  height: 31px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 5px solid #fff;
+  border-radius: 50%;
+
+  background: var(--green-dark);
+
+  box-shadow:
+    0 4px 13px rgba(0,0,0,.3);
+}
+
+
+.fp-budget-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+
+  border: 5px solid #fff;
+  border-radius: 50%;
+
+  background: var(--green-dark);
+}
+
+
+.fp-budget-labels {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 12px;
+
+  color: rgba(255,255,255,.48);
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+
+.fp-budget-labels span:last-child {
+  text-align: right;
+}
+
+
+.fp-quiz-continue,
+.fp-quiz-submit {
+  width: 100%;
+
+  min-height: 58px;
+
+  margin-top: 17px;
+
+  border: 1px solid #fff;
+  border-radius: 4px;
+
+  background: var(--green-dark);
+  color: #fff;
+
+  font-family: "Montserrat",sans-serif;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform .16s ease,
+    background .16s ease;
+}
+
+
+.fp-quiz-continue:hover,
+.fp-quiz-submit:hover {
+  transform: translateY(-1px);
+  background: #E2C15A;
+}
+
+
+
+/* =========================================================
+   CONTACT STEP
+========================================================= */
+
+.fp-contact-ready {
+  width: 55px;
+  height: 55px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 50%;
+
+  background: var(--green);
+
+  color: var(--navy);
+
+  font-size: 22px;
+  font-weight: 900;
+}
+
+
+.fp-contact-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap: 13px;
+
+  margin-top: 26px;
+}
+
+
+.fp-contact-field-full {
+  grid-column: 1 / -1;
+}
+
+
+.fp-contact-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: rgba(255,255,255,.74);
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: .07em;
+}
+
+
+.fp-contact-field input {
+  width: 100%;
+  height: 55px;
+
+  padding: 0 14px;
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  border-radius: 4px;
+
+  outline: 0;
+
+  background: #fff;
+
+  color: #25252a;
+
+  font-family: "Montserrat",sans-serif;
+
+  font-size: 13px;
+}
+
+
+.fp-contact-field input:focus {
+  border-color: var(--green);
+
+  box-shadow:
+    0 0 0 3px rgba(212,175,55,.10);
+}
+
+
+.fp-contact-field input.invalid {
+  border-color: #ff5252;
+}
+
+
+.fp-quiz-privacy {
+  margin-top: 10px;
+
+  color: rgba(255,255,255,.42);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.fp-quiz-success {
+  padding-top: 50px;
+  padding-bottom: 55px;
+
+  text-align: center;
+}
+
+
+.fp-success-icon {
+  width: 78px;
+  height: 78px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: var(--green);
+
+  color: var(--navy);
+
+  font-size: 31px;
+  font-weight: 900;
+
+  box-shadow:
+    0 14px 35px rgba(212,175,55,.18);
+}
+
+
+.fp-success-label {
+  margin-bottom: 8px;
+
+  color: var(--green);
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .12em;
+}
+
+
+.fp-quiz-success > h3 {
+  max-width: 700px;
+
+  margin: 0 auto 15px;
+
+  font-family: "Anton",sans-serif;
+
+  font-size:
+    clamp(
+      45px,
+      5vw,
+      70px
+    );
+
+  line-height: .95;
+
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+
+.fp-quiz-success > h3 span {
+  display: block;
+  color: var(--green);
+}
+
+
+.fp-quiz-success > p {
+  max-width: 580px;
+
+  margin: 0 auto;
+
+  color: rgba(255,255,255,.68);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+.fp-success-next {
+  max-width: 590px;
+
+  margin: 25px auto 0;
+  padding: 22px;
+
+  border:
+    1px solid rgba(255,255,255,.14);
+
+  background:
+    rgba(255,255,255,.055);
+
+  text-align: left;
+}
+
+
+.fp-success-next small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--green);
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: .09em;
+}
+
+
+.fp-success-next strong {
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+
+.fp-success-next p {
+  margin: 7px 0 0;
+
+  color: rgba(255,255,255,.62);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.fp-footer {
+  padding: 70px 0 24px;
+  background: var(--navy-black);
+}
+
+
+.fp-footer-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.4fr .75fr .65fr .9fr;
+
+  gap: 55px;
+
+  padding-bottom: 50px;
+}
+
+
+.fp-footer-brand img,
+.fp-footer-brand .fp-wordmark {
+  width: 240px;
+  max-height: 130px;
+
+  object-fit: contain;
+  object-position: left center;
+
+  margin-bottom: 15px;
+
+  filter:
+    drop-shadow(
+      0 4px 10px rgba(0,0,0,.18)
+    );
+}
+
+
+.fp-footer-brand p,
+.fp-footer-quote p {
+  max-width: 320px;
+
+  color: rgba(255,255,255,.57);
+
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+
+.fp-footer-links h4,
+.fp-footer-quote h4 {
+  margin-bottom: 18px;
+
+  color: #fff;
+
+  font-family: "Anton",sans-serif;
+
+  font-size: 19px;
+  font-weight: 400;
+}
+
+
+.fp-footer-links a {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: rgba(255,255,255,.57);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+.fp-footer-links a:hover {
+  color: var(--green);
+}
+
+
+.fp-footer-quote a {
+  min-height: 45px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 6px;
+  padding: 0 17px;
+
+  border: 1px solid #fff;
+  border-radius: 3px;
+
+  background: var(--green-dark);
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+.fp-footer-bottom {
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(255,255,255,.11);
+
+  color: rgba(255,255,255,.35);
+
+  font-size: 9px;
+}
+
+
+.fp-mobile-bottom {
+  display: none;
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1180px) {
+
+  .fp-logo-wrap {
+    width: 170px;
+    flex-basis: 170px;
+  }
+
+
+  .fp-nav {
+    gap: 17px;
+  }
+
+
+  .fp-nav a {
+    font-size: 10px;
+  }
+
+
+  .fp-header-cta {
+    min-width: 165px;
+    font-size: 11px;
+  }
+
+
+  .fp-icon-grid {
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+
+  .fp-trust-grid {
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 820px) {
+
+  .fp-shell {
+    width: calc(100% - 28px);
+  }
+
+
+  /* ---------------------------------------------
+     MOBILE HEADER
+  --------------------------------------------- */
+
+  .fp-header-inner {
+    width: calc(100% - 24px);
+
+    min-height: 78px;
+  }
+
+
+  .fp-logo-wrap {
+    width: 145px;
+    flex-basis: 145px;
+  }
+
+
+  .fp-logo {
+    max-height: 82px;
+  }
+
+
+  .fp-nav,
+  .fp-header-cta {
+    display: none;
+  }
+
+
+  .fp-mobile-btn {
+    display: block;
+
+    margin-left: auto;
+  }
+
+
+  .fp-mobile-menu {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    padding:
+      10px 14px 18px;
+
+    background:
+      rgba(22,8,35,.99);
+
+    border-bottom:
+      2px solid var(--green);
+  }
+
+
+  .fp-mobile-menu.open {
+    display: block;
+  }
+
+
+  .fp-mobile-menu a {
+    display: block;
+
+    padding: 14px 8px;
+
+    border-bottom:
+      1px solid rgba(255,255,255,.1);
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 900;
+  }
+
+
+  .fp-mobile-submenu-toggle {
+    width: 100%;
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8px;
+
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+
+    background: transparent;
+    color: #fff;
+
+    font-family: "Montserrat",sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+
+    cursor: pointer;
+  }
+
+
+  .fp-mobile-menu-arrow {
+    color: var(--green);
+    font-size: 20px;
+    font-weight: 500;
+    transition: transform .18s ease;
+  }
+
+
+  .fp-mobile-submenu-toggle.open .fp-mobile-menu-arrow {
+    transform: rotate(45deg);
+  }
+
+
+  .fp-mobile-submenu {
+    display: none;
+    padding: 5px 0 8px 12px;
+    background: rgba(255,255,255,.035);
+  }
+
+
+  .fp-mobile-submenu.open {
+    display: block;
+  }
+
+
+  .fp-mobile-submenu a {
+    padding: 12px 10px;
+    color: rgba(255,255,255,.82);
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+
+  .fp-mobile-menu
+  .fp-mobile-menu-cta {
+    margin-top: 12px;
+
+    border: 0;
+    border-radius: 3px;
+
+    background:
+      var(--green-dark);
+
+    text-align: center;
+  }
+
+
+
+  /* ---------------------------------------------
+     MOBILE HERO
+     PULLED UP CLOSER TO LOGO
+  --------------------------------------------- */
+
+  .fp-hero {
+    min-height: 640px;
+
+    align-items: flex-start;
+
+    padding-top: 78px;
+    padding-bottom: 44px;
+  }
+
+
+  .fp-hero-photo {
+    background-position:
+      55% center;
+  }
+
+
+  .fp-hero-shade {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(37,16,63,.70) 0%,
+        rgba(37,16,63,.86) 48%,
+        rgba(22,8,35,.94) 100%
+      );
+  }
+
+
+  .fp-hero-content {
+    padding-top: 23px;
+  }
+
+
+  .fp-hero-left {
+    max-width: 480px;
+  }
+
+
+  .fp-hero-kicker {
+    max-width: 340px;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+  }
+
+
+  .fp-hero h1 {
+    margin-bottom: 17px;
+
+    font-size:
+      clamp(
+        62px,
+        20vw,
+        95px
+      );
+  }
+
+
+  .fp-hero-desc {
+    max-width: 450px;
+
+    margin-bottom: 23px;
+
+    font-size: 14px;
+  }
+
+
+  .fp-hero-actions {
+    display: grid;
+
+    max-width: 420px;
+  }
+
+
+  .fp-hero-actions a {
+    width: 100%;
+  }
+
+
+
+  /* ---------------------------------------------
+     REVIEWS
+  --------------------------------------------- */
+
+  .fp-reviews {
+    display: block;
+  }
+
+
+  .fp-review-score {
+    min-height: 180px;
+
+    border-right: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+
+  .fp-review-card {
+    width: 285px;
+    flex-basis: 285px;
+
+    padding: 25px 19px;
+  }
+
+
+
+  /* ---------------------------------------------
+     ABOUT
+  --------------------------------------------- */
+
+  .fp-about {
+    padding: 70px 0;
+  }
+
+
+  .fp-about-grid,
+  .fp-local-grid,
+  .fp-ba-grid {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+
+  .fp-about-photo {
+    height: 390px;
+  }
+
+
+  .fp-about-badge {
+    right: 10px;
+
+    width: 115px;
+    height: 115px;
+  }
+
+
+  .fp-about-badge strong {
+    font-size: 24px;
+  }
+
+
+  .fp-about-copy h2 {
+    font-size:
+      clamp(
+        42px,
+        12vw,
+        60px
+      );
+  }
+
+
+
+  /* ---------------------------------------------
+     POPULAR
+  --------------------------------------------- */
+
+  .fp-popular {
+    padding: 60px 0;
+  }
+
+
+  .fp-icon-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 12px;
+  }
+
+
+  .fp-line-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+
+  .fp-icon-service {
+    min-height: 165px;
+  }
+
+
+
+  /* ---------------------------------------------
+     MOBILE TRUST SECTION
+     CIRCLES REMOVED
+  --------------------------------------------- */
+
+  .fp-trust {
+    padding: 25px 0;
+  }
+
+
+  .fp-trust-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap: 10px;
+  }
+
+
+  .fp-trust-item {
+    min-height: 70px;
+
+    justify-content: flex-start;
+
+    padding: 15px 14px;
+
+    border:
+      1px solid #e5e6e8;
+
+    border-radius: 7px;
+
+    background: #fff;
+
+    box-shadow:
+      0 5px 15px rgba(0,0,0,.025);
+  }
+
+
+  .fp-trust-shape {
+    display: none;
+  }
+
+
+  .fp-trust-copy {
+    position: relative;
+
+    padding-left: 15px;
+  }
+
+
+  .fp-trust-copy::before {
+    content: "";
+
+    position: absolute;
+
+    top: 1px;
+    bottom: 1px;
+    left: 0;
+
+    width: 4px;
+
+    border-radius: 20px;
+
+    background:
+      var(--green-dark);
+  }
+
+
+  .fp-trust-copy strong {
+    font-size: 10px;
+  }
+
+
+  .fp-trust-copy span {
+    margin-top: 4px;
+
+    font-size: 8px;
+  }
+
+
+  .fp-trust-item:last-child {
+    grid-column: 1 / -1;
+
+    justify-content: center;
+
+    text-align: left;
+  }
+
+
+
+  /* ---------------------------------------------
+     HELP
+  --------------------------------------------- */
+
+  .fp-help {
+    padding: 55px 0 65px;
+  }
+
+
+  .fp-help-heading p {
+    font-size: 10px;
+  }
+
+
+  .fp-help-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 13px;
+  }
+
+
+  .fp-help-card {
+    min-height: 245px;
+
+    border-width: 2px;
+  }
+
+
+  .fp-help-card-content {
+    padding: 18px 14px 16px;
+  }
+
+
+  .fp-help-card h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+
+  .fp-help-card p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+
+
+  /* ---------------------------------------------
+     LOCAL
+  --------------------------------------------- */
+
+  .fp-local {
+    padding: 70px 0;
+  }
+
+
+  .fp-local-copy h2 {
+    font-size:
+      clamp(
+        52px,
+        15vw,
+        74px
+      );
+  }
+
+
+  .fp-local-checks {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fp-local-photo {
+    height: 430px;
+  }
+
+
+
+  /* ---------------------------------------------
+     PRICING
+  --------------------------------------------- */
+
+  .fp-pricing {
+    padding: 65px 0;
+  }
+
+
+  .fp-pricing-head h2 {
+    font-size:
+      clamp(
+        68px,
+        19vw,
+        100px
+      );
+  }
+
+
+  .fp-pricing-buttons {
+    display: grid;
+  }
+
+
+  .fp-price-factors {
+    padding: 70px 0 35px;
+  }
+
+
+  .fp-factor-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+
+  .fp-factor {
+    min-height: 330px;
+  }
+
+
+
+  /* ---------------------------------------------
+     BEFORE AFTER
+  --------------------------------------------- */
+
+  .fp-before-after {
+    padding: 65px 0;
+  }
+
+
+  .fp-ba-slider {
+    height: 390px;
+  }
+
+
+  .fp-ba-handle {
+    width: 56px;
+    height: 56px;
+  }
+
+
+  .fp-ba-content h2 {
+    font-size:
+      clamp(
+        50px,
+        14vw,
+        70px
+      );
+  }
+
+
+  .fp-ba-actions {
+    display: grid;
+  }
+
+
+
+  /* ---------------------------------------------
+     FINAL CTA
+  --------------------------------------------- */
+
+  .fp-final-cta {
+    min-height: 560px;
+  }
+
+
+  .fp-final-shade {
+    background:
+      rgba(37,16,63,.87);
+  }
+
+
+  .fp-final-inner h2 {
+    font-size:
+      clamp(
+        63px,
+        18vw,
+        88px
+      );
+  }
+
+
+
+  /* ---------------------------------------------
+     QUIZ
+  --------------------------------------------- */
+
+  .fp-quiz-section {
+    padding: 65px 0 80px;
+  }
+
+
+  .fp-quiz-section-head {
+    margin-bottom: 28px;
+  }
+
+
+  .fp-quiz-section-head h2 {
+    font-size:
+      clamp(
+        52px,
+        15vw,
+        76px
+      );
+  }
+
+
+  .fp-quiz-section-head > p {
+    padding: 0 4px;
+
+    font-size: 13px;
+  }
+
+
+  .fp-quiz-shell {
+    width: 100%;
+
+    border-width: 6px;
+  }
+
+
+  .fp-quiz-progress {
+    padding:
+      18px 17px 0;
+  }
+
+
+  .fp-quiz-screen {
+    padding:
+      28px 17px 24px;
+  }
+
+
+  .fp-quiz-screen > h3 {
+    font-size:
+      clamp(
+        34px,
+        10vw,
+        48px
+      );
+  }
+
+
+  .fp-quiz-description {
+    font-size: 12px;
+  }
+
+
+  .fp-quiz-answer-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap: 9px;
+
+    margin-top: 20px;
+  }
+
+
+  .fp-quiz-answer {
+    min-height: 90px;
+
+    grid-template-columns:
+      40px minmax(0,1fr);
+
+    gap: 9px;
+
+    padding: 10px;
+  }
+
+
+  .fp-quiz-check {
+    display: none;
+  }
+
+
+  .fp-quiz-answer-icon {
+    width: 40px;
+    height: 40px;
+
+    font-size: 17px;
+  }
+
+
+  .fp-quiz-answer strong {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+
+  .fp-quiz-bottom-row {
+    margin-top: 17px;
+  }
+
+
+  .fp-budget-box {
+    padding: 18px;
+  }
+
+
+  .fp-budget-result {
+    gap: 12px;
+  }
+
+
+  .fp-budget-icon {
+    width: 47px;
+    height: 47px;
+
+    flex-basis: 47px;
+
+    font-size: 19px;
+  }
+
+
+  .fp-budget-result strong {
+    font-size: 16px;
+  }
+
+
+  .fp-budget-result p {
+    font-size: 10px;
+  }
+
+
+  .fp-budget-labels {
+    font-size: 8px;
+  }
+
+
+  .fp-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fp-contact-field-full {
+    grid-column: auto;
+  }
+
+
+  .fp-contact-field input {
+    height: 57px;
+
+    font-size: 14px;
+  }
+
+
+
+  /* ---------------------------------------------
+     FOOTER MOBILE
+  --------------------------------------------- */
+
+  .fp-footer {
+    padding-bottom: 92px;
+  }
+
+
+  .fp-footer-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 35px 22px;
+  }
+
+
+  .fp-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+
+  .fp-footer-brand img,
+.fp-footer-brand .fp-wordmark {
+    width: 220px;
+
+    max-height: 120px;
+  }
+
+
+  .fp-mobile-bottom {
+    position: fixed;
+
+    z-index: 9999;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: block;
+
+    padding:
+      9px
+      11px
+      calc(
+        9px +
+        env(safe-area-inset-bottom)
+      );
+
+    background:
+      rgba(255,255,255,.98);
+
+    border-top:
+      1px solid #ddd;
+
+    box-shadow:
+      0 -7px 22px rgba(0,0,0,.11);
+  }
+
+
+  .fp-mobile-bottom a {
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 3px;
+
+    background: var(--green-dark);
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+}
+
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .fp-shell {
+    width: calc(100% - 22px);
+  }
+
+
+  /* KEEP HERO TIGHT ON SMALL PHONES */
+
+  .fp-hero {
+    min-height: 610px;
+
+    padding-top: 74px;
+    padding-bottom: 38px;
+  }
+
+
+  .fp-hero-content {
+    padding-top: 18px;
+  }
+
+
+  .fp-hero h1 {
+    font-size:
+      clamp(
+        58px,
+        19vw,
+        80px
+      );
+  }
+
+
+  .fp-logo-wrap {
+    width: 138px;
+    flex-basis: 138px;
+  }
+
+
+  .fp-logo {
+    max-height: 78px;
+  }
+
+
+
+  /* TRUST */
+
+  .fp-trust-grid {
+    gap: 8px;
+  }
+
+
+  .fp-trust-item {
+    min-height: 65px;
+
+    padding: 12px 10px;
+  }
+
+
+  .fp-trust-copy {
+    padding-left: 12px;
+  }
+
+
+  .fp-trust-copy strong {
+    font-size: 9px;
+  }
+
+
+  .fp-trust-copy span {
+    font-size: 7px;
+  }
+
+
+
+  /* OTHER MOBILE */
+
+  .fp-help-grid,
+  .fp-icon-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .fp-help-card {
+    min-height: 220px;
+  }
+
+
+  .fp-help-card-content {
+    padding: 16px 13px 14px;
+  }
+
+
+  .fp-help-card p {
+    font-size: 11px;
+  }
+
+
+  .fp-local-photo {
+    height: 360px;
+  }
+
+
+  .fp-ba-slider {
+    height: 330px;
+  }
+
+
+  .fp-ba-handle {
+    width: 52px;
+    height: 52px;
+
+    border-width: 3px;
+  }
+
+
+  .fp-ba-tag {
+    bottom: 11px;
+
+    padding: 7px 9px;
+
+    font-size: 8px;
+  }
+
+
+  .fp-before-tag {
+    left: 11px;
+  }
+
+
+  .fp-after-tag {
+    right: 11px;
+  }
+
+
+  .fp-quiz-shell {
+    border-width: 4px;
+  }
+
+
+  .fp-quiz-screen {
+    padding:
+      26px 13px 21px;
+  }
+
+
+  .fp-quiz-progress {
+    padding:
+      16px 13px 0;
+  }
+
+
+  .fp-quiz-progress-top span,
+  .fp-quiz-progress-top strong {
+    font-size: 7.5px;
+  }
+
+
+  .fp-quiz-answer-grid {
+    gap: 7px;
+  }
+
+
+  .fp-quiz-answer {
+    min-height: 86px;
+
+    grid-template-columns:
+      36px 1fr;
+
+    gap: 7px;
+
+    padding: 8px;
+  }
+
+
+  .fp-quiz-answer-icon {
+    width: 36px;
+    height: 36px;
+
+    font-size: 15px;
+  }
+
+
+  .fp-quiz-answer strong {
+    font-size: 9px;
+  }
+
+
+  .fp-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fp-footer-brand {
+    grid-column: auto;
+  }
+
+
+  .fp-footer-brand img,
+.fp-footer-brand .fp-wordmark {
+    width: 205px;
+  }
+
+}
+
+
+/* =========================================================
+   EDIT PASS 1
+   HERO QUIZ + READABILITY + FIXED BEFORE/AFTER
+========================================================= */
+
+/* HERO: create real breathing room above the review rail */
+.fp-hero {
+  min-height: 980px;
+  align-items: stretch;
+  padding: 132px 0 84px;
+}
+
+.fp-hero-photo {
+  background-position: 54% center;
+  transform: scale(1.015);
+}
+
+.fp-hero-shade {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22,8,35,.98) 0%,
+      rgba(37,16,63,.92) 30%,
+      rgba(52,27,85,.68) 55%,
+      rgba(22,8,35,.42) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(22,8,35,.28) 0%,
+      transparent 42%,
+      rgba(22,8,35,.54) 100%
+    );
+}
+
+.fp-hero-content {
+  min-height: 764px;
+  display: grid;
+  grid-template-columns:
+    minmax(0,1.02fr)
+    minmax(430px,.74fr);
+  align-items: center;
+  gap: clamp(30px,3.2vw,54px);
+  padding-top: 0;
+}
+
+.fp-hero-left {
+  max-width: 700px;
+  padding: 24px 0;
+}
+
+.fp-hero h1 {
+  margin-bottom: 24px;
+  font-size:
+    clamp(
+      72px,
+      7.2vw,
+      118px
+    );
+}
+
+.fp-hero-desc {
+  max-width: 650px;
+  margin-bottom: 30px;
+  font-size:
+    clamp(
+      18px,
+      1.35vw,
+      21px
+    );
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.fp-hero-actions {
+  margin-bottom: 4px;
+}
+
+.fp-hero-actions a {
+  min-height: 60px;
+  font-size: 15px;
+}
+
+
+/* HERO QUIZ */
+.fp-hero-quiz {
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+  scroll-margin-top: 105px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  background: rgba(22,8,35,.58);
+  box-shadow:
+    0 22px 54px rgba(0,0,0,.24);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.fp-hero-quiz-head {
+  padding: 4px 5px 14px;
+}
+
+.fp-hero-quiz-kicker {
+  margin-bottom: 7px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.fp-hero-quiz-head h2 {
+  margin-bottom: 8px;
+  color: #fff;
+  font-family: "Anton",sans-serif;
+  font-size:
+    clamp(
+      32px,
+      2.8vw,
+      44px
+    );
+  line-height: .96;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.fp-hero-quiz-head h2 span {
+  display: block;
+  color: var(--green);
+}
+
+.fp-hero-quiz-head > p:not(.fp-hero-quiz-kicker) {
+  max-width: 470px;
+  margin-bottom: 0;
+  color: rgba(255,255,255,.90);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.fp-hero-quiz .fp-quiz-time {
+  margin: 11px 0 0;
+  color: rgba(255,255,255,.88);
+  font-size: 11px;
+}
+
+.fp-hero-quiz .fp-quiz-time span {
+  background: var(--green);
+}
+
+.fp-hero-quiz .fp-quiz-shell {
+  width: 100%;
+  margin: 0;
+  border-width: 4px;
+  border-radius: 8px;
+  background: rgba(37,16,63,.93);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.20);
+}
+
+.fp-hero-quiz .fp-quiz-progress {
+  padding: 15px 15px 0;
+}
+
+.fp-hero-quiz .fp-quiz-progress-top span,
+.fp-hero-quiz .fp-quiz-progress-top strong {
+  font-size: 9px;
+}
+
+.fp-hero-quiz .fp-quiz-screen {
+  padding: 20px 15px 18px;
+}
+
+.fp-hero-quiz .fp-quiz-step-label {
+  font-size: 9px;
+}
+
+.fp-hero-quiz .fp-quiz-screen > h3 {
+  max-width: 100%;
+  font-size:
+    clamp(
+      27px,
+      2.3vw,
+      35px
+    );
+  line-height: 1;
+}
+
+.fp-hero-quiz .fp-quiz-description {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.fp-hero-quiz .fp-quiz-answer-grid {
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.fp-hero-quiz .fp-quiz-answer {
+  min-height: 64px;
+  grid-template-columns:
+    38px 1fr 20px;
+  gap: 9px;
+  padding: 9px 10px;
+}
+
+.fp-hero-quiz .fp-quiz-answer-icon {
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+}
+
+.fp-hero-quiz .fp-quiz-answer strong {
+  font-size: 11px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.fp-hero-quiz .fp-quiz-bottom-row small,
+.fp-hero-quiz .fp-quiz-back {
+  font-size: 9px;
+}
+
+.fp-hero-quiz .fp-budget-result p,
+.fp-hero-quiz .fp-budget-labels,
+.fp-hero-quiz .fp-quiz-privacy {
+  font-size: 11px;
+}
+
+.fp-hero-quiz .fp-budget-result small {
+  font-size: 8px;
+}
+
+.fp-hero-quiz .fp-contact-field label {
+  font-size: 9px;
+}
+
+.fp-hero-quiz .fp-contact-field input {
+  min-height: 50px;
+  font-size: 16px;
+}
+
+
+/* READABILITY: raise the small copy across the site */
+.fp-heading h2 {
+  font-size:
+    clamp(
+      52px,
+      5vw,
+      78px
+    );
+}
+
+.fp-heading p {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.fp-icon-service strong {
+  font-size: 16px;
+  line-height: 1.28;
+  font-weight: 900;
+}
+
+.fp-trust-copy strong {
+  font-size: 14px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.fp-trust-copy span {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.fp-review-person strong {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.fp-review-person span {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.fp-review-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.fp-about-copy p,
+.fp-about-bottom p {
+  font-size:
+    clamp(
+      17px,
+      1.3vw,
+      20px
+    );
+  line-height: 1.65;
+}
+
+.fp-mini-title {
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.fp-local-copy > p {
+  font-size: 18px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+.fp-local-checks div {
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+.fp-price-heading p {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.fp-factor p {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.fp-ba-content > p {
+  font-size: 18px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+.fp-footer p,
+.fp-footer a {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+/* BEFORE/AFTER: both photos stay fixed. Only the reveal edge moves. */
+.fp-ba-slider {
+  --fp-ba-position: 50%;
+  cursor: ew-resize;
+}
+
+.fp-ba-after,
+.fp-ba-before {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  transform: translateZ(0) !important;
+  transition: none !important;
+}
+
+.fp-ba-before {
+  clip-path:
+    inset(
+      0
+      calc(100% - var(--fp-ba-position))
+      0
+      0
+    ) !important;
+  -webkit-clip-path:
+    inset(
+      0
+      calc(100% - var(--fp-ba-position))
+      0
+      0
+    ) !important;
+  will-change: clip-path;
+}
+
+.fp-ba-line {
+  left: var(--fp-ba-position) !important;
+  will-change: left;
+}
+
+.fp-before-tag::before {
+  content: "";
+}
+
+.fp-ba-tag {
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* TABLET */
+@media (max-width: 1100px) {
+
+  .fp-hero {
+    min-height: 0;
+    padding: 122px 0 62px;
+  }
+
+  .fp-hero-content {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .fp-hero-left {
+    max-width: 820px;
+    padding: 16px 0 0;
+  }
+
+  .fp-hero h1 {
+    font-size:
+      clamp(
+        70px,
+        10vw,
+        105px
+      );
+  }
+
+  .fp-hero-photo {
+    background-position: 58% center;
+  }
+
+  .fp-hero-shade {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(22,8,35,.80) 0%,
+        rgba(37,16,63,.83) 42%,
+        rgba(22,8,35,.94) 100%
+      );
+  }
+
+  .fp-hero-quiz {
+    max-width: 820px;
+    justify-self: center;
+  }
+
+}
+
+
+/* MOBILE */
+@media (max-width: 820px) {
+
+  .fp-hero {
+    min-height: 0;
+    padding: 96px 0 48px;
+  }
+
+  .fp-hero-content {
+    width: calc(100% - 28px);
+    gap: 30px;
+    padding-top: 18px;
+  }
+
+  .fp-hero-left {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .fp-hero-kicker {
+    max-width: 100%;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .fp-hero h1 {
+    margin-bottom: 18px;
+    font-size:
+      clamp(
+        58px,
+        17vw,
+        82px
+      );
+    line-height: .91;
+  }
+
+  .fp-hero-desc {
+    max-width: 100%;
+    margin-bottom: 22px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .fp-hero-actions {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .fp-hero-actions a {
+    width: 100%;
+    min-height: 58px;
+    font-size: 14px;
+  }
+
+  .fp-hero-quiz {
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    scroll-margin-top: 86px;
+  }
+
+  .fp-hero-quiz-head {
+    padding: 9px 7px 16px;
+  }
+
+  .fp-hero-quiz-kicker {
+    font-size: 11px;
+  }
+
+  .fp-hero-quiz-head h2 {
+    font-size:
+      clamp(
+        38px,
+        11vw,
+        52px
+      );
+  }
+
+  .fp-hero-quiz-head > p:not(.fp-hero-quiz-kicker) {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .fp-hero-quiz .fp-quiz-time {
+    font-size: 12px;
+  }
+
+  .fp-hero-quiz .fp-quiz-shell {
+    border-width: 4px;
+  }
+
+  .fp-hero-quiz .fp-quiz-progress {
+    padding: 17px 15px 0;
+  }
+
+  .fp-hero-quiz .fp-quiz-progress-top span,
+  .fp-hero-quiz .fp-quiz-progress-top strong {
+    font-size: 9.5px;
+  }
+
+  .fp-hero-quiz .fp-quiz-screen {
+    padding: 26px 15px 22px;
+  }
+
+  .fp-hero-quiz .fp-quiz-screen > h3 {
+    font-size:
+      clamp(
+        32px,
+        9vw,
+        43px
+      );
+  }
+
+  .fp-hero-quiz .fp-quiz-description {
+    font-size: 14px;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+    gap: 8px;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer {
+    min-height: 84px;
+    grid-template-columns:
+      40px minmax(0,1fr);
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .fp-hero-quiz .fp-quiz-check {
+    display: none;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer strong {
+    font-size: 12px;
+  }
+
+  .fp-heading h2 {
+    font-size:
+      clamp(
+        48px,
+        13vw,
+        66px
+      );
+  }
+
+  .fp-heading p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .fp-icon-service strong {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .fp-trust-copy strong {
+    font-size: 13px;
+  }
+
+  .fp-trust-copy span {
+    font-size: 11px;
+  }
+
+  .fp-about-copy p,
+  .fp-about-bottom p,
+  .fp-local-copy > p,
+  .fp-ba-content > p,
+  .fp-price-heading p {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .fp-local-checks div {
+    font-size: 14px;
+  }
+
+  .fp-review-person strong {
+    font-size: 14px;
+  }
+
+  .fp-review-person span {
+    font-size: 11px;
+  }
+
+  .fp-review-card p {
+    font-size: 14px;
+  }
+
+}
+
+
+/* SMALL PHONES */
+@media (max-width: 480px) {
+
+  .fp-hero {
+    min-height: 0;
+    padding-top: 88px;
+    padding-bottom: 42px;
+  }
+
+  .fp-hero-content {
+    width: calc(100% - 22px);
+    padding-top: 17px;
+  }
+
+  .fp-hero h1 {
+    font-size:
+      clamp(
+        54px,
+        16vw,
+        72px
+      );
+  }
+
+  .fp-hero-desc {
+    font-size: 16px;
+  }
+
+  .fp-hero-quiz {
+    padding: 6px;
+  }
+
+  .fp-hero-quiz-head h2 {
+    font-size:
+      clamp(
+        35px,
+        10.8vw,
+        46px
+      );
+  }
+
+  .fp-hero-quiz .fp-quiz-answer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer {
+    min-height: 68px;
+    grid-template-columns:
+      44px minmax(0,1fr);
+    padding: 10px 12px;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .fp-hero-quiz .fp-quiz-answer strong {
+    font-size: 14px;
+  }
+
+  .fp-hero-quiz .fp-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fp-hero-quiz .fp-contact-field-full {
+    grid-column: auto;
+  }
+
+  .fp-trust-copy strong {
+    font-size: 12px;
+  }
+
+  .fp-trust-copy span {
+    font-size: 10px;
+  }
+
+  .fp-ba-slider {
+    height: 320px;
+  }
+
+}
+
+</style>
+
+<div id="vip-pro">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+  <header class="fp-header" id="fpHeader">
+
+    <div class="fp-header-inner">
+
+      <a href="#home" class="fp-logo-wrap" aria-label="VIP Junk Removal home">
+        <span class="fp-wordmark"><strong>V.I.P.</strong><small>JUNK REMOVAL</small></span>
+      </a>
+
+      <nav class="fp-nav">
+
+        <div class="fp-nav-item fp-has-dropdown">
+          <a href="#services" class="fp-nav-parent">
+            JUNK REMOVAL <span class="fp-nav-chevron">⌄</span>
+          </a>
+
+          <div class="fp-dropdown" aria-label="Junk removal services">
+            <a href="#services"><strong>Full-Service Junk Removal</strong><span>Household and commercial junk hauled away</span></a>
+            <a href="#services"><strong>Estate & REO Cleanouts</strong><span>Property clear-outs handled from start to finish</span></a>
+            <a href="#services"><strong>Hoarder Cleanouts</strong><span>Respectful help with difficult cleanout situations</span></a>
+            <a href="#services"><strong>Construction Debris</strong><span>Debris pickup after renovation and project work</span></a>
+          </div>
+        </div>
+
+        <div class="fp-nav-item fp-has-dropdown">
+          <a href="#areas" class="fp-nav-parent">
+            SERVICE AREA <span class="fp-nav-chevron">⌄</span>
+          </a>
+
+          <div class="fp-dropdown fp-dropdown-compact" aria-label="Service areas">
+            <a href="#areas"><strong>East Orange & Newark Area</strong></a>
+            <a href="#areas"><strong>Linden & Nearby Communities</strong></a>
+            <a href="#areas"><strong>North New Jersey</strong></a>
+            <a href="#areas"><strong>Central New Jersey</strong></a>
+          </div>
+        </div>
+
+        <a href="#pricing">PRICING</a>
+
+        <div class="fp-nav-item fp-has-dropdown">
+          <a href="#about" class="fp-nav-parent">
+            ABOUT <span class="fp-nav-chevron">⌄</span>
+          </a>
+
+          <div class="fp-dropdown fp-dropdown-compact" aria-label="About VIP Junk Removal">
+            <a href="#about"><strong>About V.I.P.</strong></a>
+            <a href="#reviews"><strong>Customer Reviews</strong></a>
+            <a href="https://share.google/Ld9O3vo8Pq6ypLrJB" target="_blank" rel="noopener"><strong>Google Business Profile</strong></a>
+          </div>
+        </div>
+
+        <a href="#reviews">REVIEWS</a>
+        <a href="#quote">CONTACT</a>
+      </nav>
+
+      <a href="#quote" class="fp-header-cta">GET A FREE ESTIMATE</a>
+
+      <button class="fp-mobile-btn" onclick="fpToggleMenu()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+
+    <div class="fp-mobile-menu" id="fpMobileMenu">
+      <button type="button" class="fp-mobile-submenu-toggle" onclick="fpToggleMobileSubmenu('fpMobileServices', this)">
+        <span>JUNK REMOVAL</span><span class="fp-mobile-menu-arrow">+</span>
+      </button>
+      <div class="fp-mobile-submenu" id="fpMobileServices">
+        <a href="#services" onclick="fpCloseMenu()">Full-Service Junk Removal</a>
+        <a href="#services" onclick="fpCloseMenu()">Estate & REO Cleanouts</a>
+        <a href="#services" onclick="fpCloseMenu()">Hoarder Cleanouts</a>
+        <a href="#services" onclick="fpCloseMenu()">Construction Debris</a>
+      </div>
+      <a href="#areas" onclick="fpCloseMenu()">SERVICE AREA</a>
+      <a href="#pricing" onclick="fpCloseMenu()">PRICING</a>
+      <button type="button" class="fp-mobile-submenu-toggle" onclick="fpToggleMobileSubmenu('fpMobileAbout', this)">
+        <span>ABOUT</span><span class="fp-mobile-menu-arrow">+</span>
+      </button>
+      <div class="fp-mobile-submenu" id="fpMobileAbout">
+        <a href="#about" onclick="fpCloseMenu()">About V.I.P.</a>
+        <a href="#reviews" onclick="fpCloseMenu()">Customer Reviews</a>
+        <a href="https://share.google/Ld9O3vo8Pq6ypLrJB" target="_blank" rel="noopener" onclick="fpCloseMenu()">Google Business Profile</a>
+      </div>
+      <a href="#reviews" onclick="fpCloseMenu()">REVIEWS</a>
+      <a href="#quote" onclick="fpCloseMenu()">CONTACT</a>
+      <a href="#quote" class="fp-mobile-menu-cta" onclick="fpCloseMenu()">GET A FREE ESTIMATE</a>
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section class="fp-hero" id="home">
+
+    <div class="fp-hero-photo"></div>
+    <div class="fp-hero-shade"></div>
+
+    <div class="fp-shell fp-hero-content">
+
+      <div class="fp-hero-left">
+
+        <p class="fp-hero-kicker">
+          <span>LOCAL</span>
+          NORTH & CENTRAL NEW JERSEY JUNK REMOVAL
+        </p>
+
+        <h1>
+          NO JOB TOO BIG.<br>
+          <span>NO JUNK TOO SMALL.</span>
+        </h1>
+
+        <p class="fp-hero-desc">
+          Full-service junk removal for homes, businesses and properties across New Jersey.
+          Get a free estimate, clear pricing before work begins, and a crew that handles
+          the lifting, loading, hauling and final sweep-up for you.
+        </p>
+
+        <div class="fp-hero-actions">
+
+          <a href="#quote" class="fp-green-btn">
+            GET A FREE ESTIMATE
+          </a>
+
+          <a href="tel:+19738106234" class="fp-outline-btn">
+            <span>☎</span>
+            (973) 810-6234
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <aside class="fp-hero-quiz" id="quote" aria-label="Get a fast junk removal quote">
+
+      <div class="fp-quiz-shell">
+
+        <!-- PROGRESS -->
+
+        <div class="fp-quiz-progress">
+
+          <div class="fp-quiz-progress-top">
+
+            <span id="fpQuizProgressText">
+              Question 1 of 5
+            </span>
+
+            <strong id="fpQuizProgressPercent">
+              17% COMPLETE
+            </strong>
+
+          </div>
+
+          <div class="fp-quiz-progress-track">
+
+            <div
+              class="fp-quiz-progress-fill"
+              id="fpQuizProgressFill"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STEP 1 -->
+        <section
+          class="fp-quiz-screen active"
+          data-fp-screen="0"
+        >
+
+          <div class="fp-quiz-step-label">
+            QUESTION 1
+          </div>
+
+          <h3>
+            What do you need removed?
+          </h3>
+
+          <p class="fp-quiz-description">
+            Pick the option that best describes the main job.
+          </p>
+
+
+          <div
+            class="fp-quiz-answer-grid"
+            data-fp-question="junk_type"
+            data-fp-step="1"
+          >
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Furniture & Mattresses"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🛋️
+              </span>
+
+              <strong>
+                Furniture & Mattresses
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Appliances"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🧊
+              </span>
+
+              <strong>
+                Appliances
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Garage Basement Attic"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🏠
+              </span>
+
+              <strong>
+                Garage / Basement / Attic
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Full Home or Estate Cleanout"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                📦
+              </span>
+
+              <strong>
+                Home / Estate Cleanout
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Yard Waste Outdoor Junk"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🌿
+              </span>
+
+              <strong>
+                Yard / Outdoor Junk
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Construction Debris"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🧱
+              </span>
+
+              <strong>
+                Construction Debris
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Commercial Junk"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🏢
+              </span>
+
+              <strong>
+                Commercial Junk
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Mixed Junk Not Sure"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                ♻️
+              </span>
+
+              <strong>
+                Mixed Junk / Not Sure
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <span></span>
+
+            <small>
+              Tap an answer to continue
+            </small>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STEP 2 -->
+        <section
+          class="fp-quiz-screen"
+          data-fp-screen="1"
+        >
+
+          <div class="fp-quiz-step-label">
+            QUESTION 2
+          </div>
+
+          <h3>
+            About how much stuff needs to go?
+          </h3>
+
+          <p class="fp-quiz-description">
+            Don't worry about being exact. Choose the closest estimate.
+          </p>
+
+
+          <div
+            class="fp-quiz-answer-grid"
+            data-fp-question="junk_amount"
+            data-fp-step="2"
+          >
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="1 to 2 Items"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                1
+              </span>
+
+              <strong>
+                1–2 Items
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Small Load"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                📦
+              </span>
+
+              <strong>
+                Small Load
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Half Truck"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                ½
+              </span>
+
+              <strong>
+                About Half a Truck
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Full Truck"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🚚
+              </span>
+
+              <strong>
+                Full Truck
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Multiple Loads"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🚛
+              </span>
+
+              <strong>
+                Multiple Loads
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Not Sure"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                ?
+              </span>
+
+              <strong>
+                I'm Not Sure
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <button
+              type="button"
+              class="fp-quiz-back"
+              data-fp-back="0"
+            >
+              ← BACK
+            </button>
+
+            <small>
+              Tap an answer to continue
+            </small>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STEP 3 -->
+        <section
+          class="fp-quiz-screen"
+          data-fp-screen="2"
+        >
+
+          <div class="fp-quiz-step-label">
+            QUESTION 3
+          </div>
+
+          <h3>
+            Where is the junk located?
+          </h3>
+
+          <p class="fp-quiz-description">
+            This helps us understand access and how much lifting is involved.
+          </p>
+
+
+          <div
+            class="fp-quiz-answer-grid"
+            data-fp-question="junk_location"
+            data-fp-step="3"
+          >
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Curb or Driveway"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🚗
+              </span>
+
+              <strong>
+                Curb / Driveway
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Garage"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🚪
+              </span>
+
+              <strong>
+                Garage
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Inside Home"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🏡
+              </span>
+
+              <strong>
+                Inside the Home
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Basement or Upstairs"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🪜
+              </span>
+
+              <strong>
+                Basement / Upstairs
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Backyard Outdoor"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                🌳
+              </span>
+
+              <strong>
+                Backyard / Outdoor
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Multiple Areas"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                📍
+              </span>
+
+              <strong>
+                Multiple Areas
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <button
+              type="button"
+              class="fp-quiz-back"
+              data-fp-back="1"
+            >
+              ← BACK
+            </button>
+
+            <small>
+              Almost there
+            </small>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STEP 4 -->
+        <section
+          class="fp-quiz-screen"
+          data-fp-screen="3"
+        >
+
+          <div class="fp-quiz-step-label">
+            QUESTION 4
+          </div>
+
+          <h3>
+            When would you like it gone?
+          </h3>
+
+          <p class="fp-quiz-description">
+            Choose the timing that works best for you.
+          </p>
+
+
+          <div
+            class="fp-quiz-answer-grid"
+            data-fp-question="timeline"
+            data-fp-step="4"
+          >
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Today ASAP"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                ⚡
+              </span>
+
+              <strong>
+                Today / ASAP
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Next 1 to 2 Days"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                48
+              </span>
+
+              <strong>
+                Next 1–2 Days
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="This Week"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                📅
+              </span>
+
+              <strong>
+                This Week
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="fp-quiz-answer"
+              data-value="Flexible"
+            >
+
+              <span class="fp-quiz-answer-icon">
+                ✓
+              </span>
+
+              <strong>
+                I'm Flexible
+              </strong>
+
+              <span class="fp-quiz-check">
+                ✓
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <button
+              type="button"
+              class="fp-quiz-back"
+              data-fp-back="2"
+            >
+              ← BACK
+            </button>
+
+            <small>
+              One more question
+            </small>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STEP 5 -->
+        <section
+          class="fp-quiz-screen"
+          data-fp-screen="4"
+        >
+
+          <div class="fp-quiz-step-label">
+            QUESTION 5
+          </div>
+
+          <h3>
+            What matters most when it comes to your budget?
+          </h3>
+
+          <p class="fp-quiz-description">
+            Move the slider based on the type of service experience you're looking for.
+            No specific prices are shown.
+          </p>
+
+
+          <div class="fp-budget-box">
+
+            <div class="fp-budget-result">
+
+              <div
+                class="fp-budget-icon"
+                id="fpBudgetIcon"
+              >
+                ⚖️
+              </div>
+
+
+              <div>
+
+                <small>
+                  YOUR PREFERENCE
+                </small>
+
+                <strong id="fpBudgetTitle">
+                  Best Overall Value
+                </strong>
+
+                <p id="fpBudgetDescription">
+                  A fair balance between price, convenience and
+                  having the heavy work handled for you.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="fp-budget-slider-wrap">
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="42"
+                id="fpBudgetSlider"
+                class="fp-budget-slider"
+              >
+
+
+              <div class="fp-budget-labels">
+
+                <span>
+                  Keep it economical
+                </span>
+
+                <span>
+                  Priority convenience
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="fp-quiz-continue"
+            id="fpBudgetContinue"
+          >
+            CONTINUE →
+          </button>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <button
+              type="button"
+              class="fp-quiz-back"
+              data-fp-back="3"
+            >
+              ← BACK
+            </button>
+
+            <small>
+              Final step next
+            </small>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- CONTACT -->
+        <section
+          class="fp-quiz-screen"
+          data-fp-screen="5"
+        >
+
+          <div class="fp-contact-ready">
+            ✓
+          </div>
+
+          <div class="fp-quiz-step-label">
+            YOUR QUOTE REQUEST IS READY
+          </div>
+
+          <h3>
+            Where should we contact you?
+          </h3>
+
+          <p class="fp-quiz-description">
+            Enter your contact information so the V.I.P. team can review
+            the job details you just provided.
+          </p>
+
+
+          <form id="fpLeadForm" novalidate>
+
+            <div class="fp-contact-grid">
+
+
+              <div class="fp-contact-field">
+
+                <label for="fpFirstName">
+                  FIRST NAME
+                </label>
+
+                <input
+                  id="fpFirstName"
+                  type="text"
+                  autocomplete="given-name"
+                  placeholder="First name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fp-contact-field">
+
+                <label for="fpLastName">
+                  LAST NAME
+                </label>
+
+                <input
+                  id="fpLastName"
+                  type="text"
+                  autocomplete="family-name"
+                  placeholder="Last name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fp-contact-field">
+
+                <label for="fpPhone">
+                  PHONE NUMBER
+                </label>
+
+                <input
+                  id="fpPhone"
+                  type="tel"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  placeholder="(555) 555-5555"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fp-contact-field">
+
+                <label for="fpEmail">
+                  EMAIL
+                </label>
+
+                <input
+                  id="fpEmail"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="you@email.com"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fp-contact-field fp-contact-field-full">
+
+                <label for="fpZip">
+                  ZIP CODE
+                </label>
+
+                <input
+                  id="fpZip"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="postal-code"
+                  placeholder="ZIP code"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="fp-quiz-submit"
+              id="fpQuizSubmit"
+            >
+              GET MY FAST QUOTE →
+            </button>
+
+
+            <div class="fp-quiz-privacy">
+              🔒 Your information stays private.
+            </div>
+
+          </form>
+
+
+          <div class="fp-quiz-bottom-row">
+
+            <button
+              type="button"
+              class="fp-quiz-back"
+              data-fp-back="4"
+            >
+              ← BACK
+            </button>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- SUCCESS -->
+        <section
+          class="fp-quiz-screen fp-quiz-success"
+          data-fp-screen="6"
+        >
+
+          <div class="fp-success-icon">
+            ✓
+          </div>
+
+          <p class="fp-success-label">
+            REQUEST RECEIVED
+          </p>
+
+          <h3>
+            WE'VE GOT
+            <span>YOUR INFORMATION.</span>
+          </h3>
+
+          <p>
+            Thanks for reaching out to V.I.P. Junk Removal.
+            Your New Jersey junk removal request is ready for the team to review.
+          </p>
+
+          <div class="fp-success-next">
+
+            <small>
+              WHAT HAPPENS NEXT
+            </small>
+
+            <strong>
+              Keep an eye on your phone.
+            </strong>
+
+            <p>
+              A team member can use the information you provided
+              to understand the job before speaking with you.
+            </p>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      </aside>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       REVIEWS
+  ====================================================== -->
+  <section class="fp-reviews" id="reviews">
+    <div class="fp-review-score">
+      <strong>5-STAR FEEDBACK</strong>
+      <div class="fp-review-stars">★★★★★</div>
+      <p>Customer feedback for V.I.P. Junk Removal</p>
+      <div class="fp-google"><span class="google-blue">G</span><span class="google-red">o</span><span class="google-yellow">o</span><span class="google-blue">g</span><span class="google-green">l</span><span class="google-red">e</span></div>
+    </div>
+    <div class="fp-review-window"><div class="fp-review-track">
+      <article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar ">J</div>
+            <div class="fp-review-person"><strong>Janet Wenzelburger</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>A repeat customer who values the easy scheduling, courteous crews and consistently strong service.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-purple">K</div>
+            <div class="fp-review-person"><strong>Kristin Hall</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Praised the friendly team, clear arrival updates, extra effort and the cleanup they did around her driveway.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-brown">J</div>
+            <div class="fp-review-person"><strong>Janet Wenzelburger</strong><span>Repeat Customer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Uses V.I.P. repeatedly and highlights the convenience of booking plus the professionalism of the crews.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-green">K</div>
+            <div class="fp-review-person"><strong>Kristin Hall</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Called out the team for going above and beyond while keeping her informed throughout the job.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar ">J</div>
+            <div class="fp-review-person"><strong>Janet Wenzelburger</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>A repeat customer who values the easy scheduling, courteous crews and consistently strong service.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-purple">K</div>
+            <div class="fp-review-person"><strong>Kristin Hall</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Praised the friendly team, clear arrival updates, extra effort and the cleanup they did around her driveway.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-brown">J</div>
+            <div class="fp-review-person"><strong>Janet Wenzelburger</strong><span>Repeat Customer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Uses V.I.P. repeatedly and highlights the convenience of booking plus the professionalism of the crews.</p>
+        </article><article class="fp-review-card">
+          <div class="fp-review-card-top">
+            <div class="fp-review-avatar fp-green">K</div>
+            <div class="fp-review-person"><strong>Kristin Hall</strong><span>Google Reviewer</span></div>
+            <div class="fp-g-icon">G</div>
+          </div>
+          <div class="fp-small-stars">★★★★★</div>
+          <p>Called out the team for going above and beyond while keeping her informed throughout the job.</p>
+        </article>
+    </div></div>
+  </section>
+
+
+
+  <!-- =====================================================
+       TOP RATED COMPANY
+  ====================================================== -->
+  <section class="fp-about" id="about">
+    <div class="fp-shell fp-about-grid">
+      <div class="fp-about-visual">
+        <div class="fp-about-photo"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_1965.heic?v=1762655709&width=1800&format=pjpg" alt="V.I.P. Junk Removal truck on a New Jersey cleanout job"></div>
+        <div class="fp-about-badge"><strong>V.I.P.</strong><span>JUNK REMOVAL</span></div>
+      </div>
+      <div class="fp-about-copy">
+        <h2>NEW JERSEY JUNK REMOVAL <span>WITH THE HEAVY WORK HANDLED.</span></h2>
+        <p><strong>V.I.P. Junk Removal LLC</strong> is a family-run junk removal company serving New Jersey homes, businesses and properties. The company has been operating under the V.I.P. name since 2018, with industry experience that goes back even further.</p>
+        <p>From furniture and household junk to estate cleanouts, construction debris, hoarder cleanouts and REO properties, the crew is built for jobs ranging from a few bulky items to major property clear-outs.</p>
+        <p>Customers can request a free estimate, review the price before work begins, and let the crew handle the lifting, loading, hauling and cleanup.</p>
+        <a href="#quote" class="fp-text-link">REQUEST A FREE ESTIMATE <span>→</span></a>
+      </div>
+    </div>
+    <div class="fp-shell fp-about-bottom"><p>No national-franchise feel. Just a local V.I.P. crew focused on making the entire cleanout process simple from the first call to the final sweep.</p></div>
+  </section>
+
+
+
+  <!-- =====================================================
+       POPULAR SERVICES
+  ====================================================== -->
+  <section class="fp-popular" id="services">
+
+    <div class="fp-shell">
+
+      <div class="fp-heading fp-heading-dark">
+
+        <h2>
+          V.I.P.
+          <span>JUNK REMOVAL</span>
+          SERVICES
+        </h2>
+
+        <p>
+          From everyday household junk to major cleanouts, V.I.P. handles the jobs New Jersey customers need cleared out.
+        </p>
+
+      </div>
+
+
+      <div class="fp-icon-grid">
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <path
+                d="M25 51V39c0-8 6-14 14-14h22c8 0 14 6 14 14v12"
+              />
+
+              <path
+                d="M20 50c-7 0-11 5-11 12v18h13v-9h56v9h13V62c0-7-4-12-11-12-5 0-9 4-9 9v6H29v-6c0-5-4-9-9-9Z"
+              />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            Furniture & Bulky Item
+            <br>
+            Removal
+          </strong>
+
+        </div>
+
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <path d="M10 45 42 19l32 26" />
+              <path d="M19 39v42h42V39" />
+              <path d="M31 81V57h15v24" />
+
+              <circle
+                cx="73"
+                cy="62"
+                r="13"
+              />
+
+              <path d="M83 70 94 77" />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            Estate
+            <br>
+            Cleanouts
+          </strong>
+
+        </div>
+
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <rect
+                x="20"
+                y="25"
+                width="60"
+                height="57"
+              />
+
+              <path d="M17 25h66v-9H17z" />
+              <path d="M25 39h50M25 50h50" />
+
+              <rect
+                x="30"
+                y="61"
+                width="17"
+                height="21"
+              />
+
+              <rect
+                x="52"
+                y="64"
+                width="18"
+                height="18"
+              />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            Hoarder
+            <br>
+            Cleanouts
+          </strong>
+
+        </div>
+
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <path d="M18 79V31h64v48" />
+              <path d="M25 42h50M25 53h50" />
+              <path d="M31 65h17v14" />
+              <path d="M53 63h18v16" />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            REO & Property
+            <br>
+            Cleanouts
+          </strong>
+
+        </div>
+
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <path d="M17 79V39l27-19 27 19v40" />
+              <path d="M38 34h12M44 28v12" />
+
+              <rect
+                x="29"
+                y="50"
+                width="10"
+                height="12"
+              />
+
+              <rect
+                x="49"
+                y="50"
+                width="10"
+                height="12"
+              />
+
+              <circle
+                cx="76"
+                cy="60"
+                r="10"
+              />
+
+              <path d="M65 80c2-11 7-16 15-16s13 5 15 16" />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            Construction
+            <br>
+            Debris
+          </strong>
+
+        </div>
+
+
+        <div class="fp-icon-service">
+
+          <div class="fp-line-icon">
+
+            <svg viewBox="0 0 100 100">
+
+              <path d="M13 82V46h28v36" />
+              <path d="M41 82V20l24 12v50" />
+              <path d="M65 82V40l22 8v34" />
+              <path d="M49 35h6M49 48h6M49 61h6" />
+              <path d="M72 54h6M72 66h6" />
+
+            </svg>
+
+          </div>
+
+          <strong>
+            Residential & Commercial
+            <br>
+            Junk Removal
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       TRUST STRIP
+  ====================================================== -->
+  <section class="fp-trust">
+    <div class="fp-shell fp-trust-grid">
+      <div class="fp-trust-item"><div class="fp-trust-shape">FREE</div><div class="fp-trust-copy"><strong>FREE</strong><span>ESTIMATES</span></div></div>
+      <div class="fp-trust-item"><div class="fp-trust-shape">✓</div><div class="fp-trust-copy"><strong>UPFRONT</strong><span>PRICING</span></div></div>
+      <div class="fp-trust-item"><div class="fp-trust-shape">HOME</div><div class="fp-trust-copy"><strong>FAMILY</strong><span>RUN</span></div></div>
+      <div class="fp-trust-item"><div class="fp-trust-shape">♻</div><div class="fp-trust-copy"><strong>RESPONSIBLE</strong><span>DISPOSAL</span></div></div>
+      <div class="fp-trust-item"><div class="fp-trust-shape">NJ</div><div class="fp-trust-copy"><strong>NORTH & CENTRAL</strong><span>NEW JERSEY</span></div></div>
+    </div>
+  </section>
+
+
+
+  <!-- =====================================================
+       HOW CAN WE HELP
+  ====================================================== -->
+  <section class="fp-help">
+    <div class="fp-help-photo"></div><div class="fp-help-shade"></div>
+    <div class="fp-shell fp-help-inner">
+      <div class="fp-help-heading"><p>NO JOB IS TOO BIG OR TOO SMALL</p><h2>WHAT CAN V.I.P. CLEAR OUT?</h2><span></span></div>
+      <div class="fp-help-grid">
+        <a href="#quote" class="fp-help-card fp-help-card-photo"><div class="fp-help-image"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_0957.heic?v=1762655711&width=1800&format=pjpg" alt="Backyard junk cleanout"></div><div class="fp-help-card-overlay"></div><div class="fp-help-card-content"><h3>Backyard<br>Cleanouts</h3><p>Outdoor junk, bulky items and accumulated debris cleared out.</p><span class="fp-help-learn">GET A FREE ESTIMATE →</span></div></a>
+        <a href="#quote" class="fp-help-card fp-help-card-photo"><div class="fp-help-image"><img src="https://junkremovalvip.com/cdn/shop/files/preview_images/bba86ea8b3c14158b0280535085fa555.thumbnail.0000000000.jpg?v=1762658783&width=1920" alt="V.I.P. Junk Removal crew"></div><div class="fp-help-card-overlay"></div><div class="fp-help-card-content"><h3>Hoarder<br>Cleanouts</h3><p>Respectful, hands-on help for difficult and high-volume cleanout situations.</p><span class="fp-help-learn">GET A FREE ESTIMATE →</span></div></a>
+        <a href="#quote" class="fp-help-card fp-help-card-photo"><div class="fp-help-image"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_0446.heic?v=1762655709&width=1800&format=pjpg" alt="Interior cleanout debris"></div><div class="fp-help-card-overlay"></div><div class="fp-help-card-content"><h3>Tight-Space<br>Cleanouts</h3><p>Attics, basements, rooms and hard-to-reach areas handled by the crew.</p><span class="fp-help-learn">GET A FREE ESTIMATE →</span></div></a>
+        <a href="#quote" class="fp-help-card fp-help-card-photo"><div class="fp-help-image"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_2679.heic?v=1762655713&width=1800&format=pjpg" alt="Construction debris removal"></div><div class="fp-help-card-overlay"></div><div class="fp-help-card-content"><h3>Construction<br>Debris</h3><p>Project debris loaded, hauled away and removed from the property.</p><span class="fp-help-learn">GET A FREE ESTIMATE →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- =====================================================
+       LOCAL COMPANY
+  ====================================================== -->
+  <section class="fp-local" id="areas">
+    <div class="fp-shell fp-local-grid">
+      <div class="fp-local-copy">
+        <p class="fp-mini-title">SERVING NORTH & CENTRAL NEW JERSEY</p>
+        <h2>BOOK IT.<br><span>V.I.P. HAULS IT.</span></h2>
+        <p>V.I.P. is based in East Orange and serves North New Jersey, with additional availability into Central New Jersey. Service is flexible by location and schedule.</p>
+        <p>The process is simple. Schedule your job, get an arrival update, review the all-inclusive price, then let the crew handle the heavy lifting and cleanup.</p>
+        <div class="fp-local-checks">
+          <div><span>1</span> Schedule online or call (973) 810-6234</div>
+          <div><span>2</span> Get a call before the crew arrives</div>
+          <div><span>3</span> Approve the price before work begins</div>
+          <div><span>4</span> V.I.P. loads, hauls and sweeps up</div>
+        </div>
+        <a href="#quote" class="fp-green-btn">REQUEST SERVICE</a>
+      </div>
+      <div class="fp-local-photo"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_1965.heic?v=1762655709&width=1800&format=pjpg" alt="V.I.P. Junk Removal serving New Jersey"></div>
+    </div>
+  </section>
+
+
+
+  <!-- =====================================================
+       PRICING
+  ====================================================== -->
+  <section class="fp-pricing" id="pricing">
+
+    <div class="fp-shell">
+
+      <div class="fp-pricing-head">
+
+        <p>
+          FREE ESTIMATES. CLEAR PRICING.
+        </p>
+
+        <h2>
+          JUNK REMOVAL
+          <span>PRICING</span>
+        </h2>
+
+        <div class="fp-price-note">
+          VOLUME-BASED PRICING • SINGLE-ITEM OPTIONS
+        </div>
+
+        <div class="fp-pricing-buttons">
+
+          <a href="#quote" class="fp-green-btn">
+            GET A FREE ESTIMATE
+          </a>
+
+          <a href="tel:+19738106234" class="fp-outline-btn">
+            ☎ CALL (973) 810-6234
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PRICING FACTORS
+  ====================================================== -->
+  <section class="fp-price-factors">
+
+    <div class="fp-shell">
+
+      <div class="fp-price-heading">
+
+        <h2>
+          HOW DOES JUNK REMOVAL PRICING WORK?
+        </h2>
+
+        <p>
+          V.I.P. reviews what needs to be removed and gives you the price before the work begins. Pricing is primarily based on how much space your junk takes up, with discounted options available for certain single-item removals.
+        </p>
+
+      </div>
+
+
+      <div class="fp-factor-grid">
+
+        <div class="fp-factor">
+
+          <span class="fp-factor-label">
+            FACTOR #1
+          </span>
+
+          <h3>
+            LOAD SIZE
+          </h3>
+
+          <p>
+            How much truck space the items use.
+          </p>
+
+          <div class="fp-factor-art">
+
+            <svg viewBox="0 0 260 150">
+
+              <path
+                d="M18 105h48V77h74v28h35v29H18z"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M18 105c0-20 15-34 34-34h14v34"
+                class="fp-art-dark fp-art-stroke"
+              />
+
+              <circle
+                cx="55"
+                cy="134"
+                r="15"
+                class="fp-art-dark"
+              />
+
+              <circle
+                cx="156"
+                cy="134"
+                r="15"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M75 77c5-19 21-30 38-18 12-16 34-11 38 8 15-4 26 2 28 10"
+                class="fp-art-green fp-art-stroke"
+              />
+
+              <path
+                d="M74 77h106v28H74z"
+                class="fp-art-green"
+              />
+
+            </svg>
+
+          </div>
+
+        </div>
+
+
+        <div class="fp-factor">
+
+          <span class="fp-factor-label">
+            FACTOR #2
+          </span>
+
+          <h3>
+            REMOVAL LABOR
+          </h3>
+
+          <p>
+            Stairs, tight access and lifting requirements.
+          </p>
+
+          <div class="fp-factor-art">
+
+            <svg viewBox="0 0 260 150">
+
+              <path
+                d="M30 120h45V95h25V70h25V45h25"
+                class="fp-art-dark fp-art-stroke"
+              />
+
+              <rect
+                x="103"
+                y="54"
+                width="64"
+                height="34"
+                rx="5"
+                class="fp-art-green"
+                transform="rotate(28 135 70)"
+              />
+
+              <circle
+                cx="80"
+                cy="40"
+                r="9"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M81 49 94 68 87 90"
+                class="fp-art-dark fp-art-stroke"
+              />
+
+              <circle
+                cx="176"
+                cy="102"
+                r="9"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M175 111 162 128"
+                class="fp-art-dark fp-art-stroke"
+              />
+
+            </svg>
+
+          </div>
+
+        </div>
+
+
+        <div class="fp-factor">
+
+          <span class="fp-factor-label">
+            FACTOR #3
+          </span>
+
+          <h3>
+            DISPOSAL
+          </h3>
+
+          <p>
+            The material type and disposal requirements.
+          </p>
+
+          <div class="fp-factor-art">
+
+            <svg viewBox="0 0 260 150">
+
+              <path
+                d="M31 132c0-30 5-48 20-61 13 10 20 30 19 61"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M188 132c0-30 5-48 20-61 13 10 20 30 19 61"
+                class="fp-art-dark"
+              />
+
+              <path
+                d="M75 132c0-40 8-67 27-85 17 15 26 45 26 85"
+                class="fp-art-dark"
+              />
+
+              <rect
+                x="117"
+                y="53"
+                width="54"
+                height="79"
+                rx="8"
+                class="fp-art-green"
+              />
+
+              <path
+                d="M113 53h62"
+                class="fp-art-green fp-art-stroke"
+              />
+
+              <text
+                x="132"
+                y="99"
+                font-size="30"
+                fill="#fff"
+              >
+                ♻
+              </text>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       BEFORE / AFTER
+  ====================================================== -->
+  <section class="fp-before-after">
+    <div class="fp-shell fp-ba-grid">
+      <div class="fp-ba-wrap">
+        <div class="fp-ba-slider" id="fpSlider">
+          <img src="https://junkremovalvip.com/cdn/shop/files/IMG_1965.heic?v=1762655709&width=1800&format=pjpg" alt="V.I.P. Junk Removal truck loaded during a haul-away" class="fp-ba-after">
+          <img src="https://junkremovalvip.com/cdn/shop/files/IMG_0026.heic?v=1762655716&width=1800&format=pjpg" alt="Junk awaiting removal at a V.I.P. cleanout" class="fp-ba-before" id="fpBeforeImage">
+          <div class="fp-ba-line" id="fpBaLine"><div class="fp-ba-handle"><span>‹</span><span>›</span></div></div>
+          <input type="range" min="0" max="100" value="50" id="fpRange" class="fp-ba-range" aria-label="V.I.P. Junk Removal job photo comparison">
+          <span class="fp-ba-tag fp-before-tag">JUNK TO CLEAR</span>
+          <span class="fp-ba-tag fp-after-tag">V.I.P. HAUL-AWAY</span>
+        </div>
+      </div>
+      <div class="fp-ba-content">
+        <p class="fp-mini-title fp-green-copy">SEE V.I.P. AT WORK</p>
+        <h2>YOU POINT TO IT. <span>V.I.P. HAULS IT AWAY.</span></h2>
+        <p>Furniture, household junk, estate contents, construction debris, outdoor clutter and high-volume cleanouts are all part of the work V.I.P. handles.</p>
+        <div class="fp-ba-actions"><a href="#quote" class="fp-green-btn">GET A FREE ESTIMATE</a><a href="tel:+19738106234" class="fp-outline-btn">☎ CALL V.I.P.</a></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- =====================================================
+       GOOGLE BUSINESS PROFILE
+  ====================================================== -->
+  <section class="fp-google-profile">
+
+    <div class="fp-shell fp-google-profile-inner">
+
+      <div class="fp-google-profile-copy">
+
+        <p class="fp-mini-title fp-green-copy">
+          CHECK US OUT ON GOOGLE
+        </p>
+
+        <h2>
+          VISIT OUR
+          <span>GOOGLE BUSINESS PROFILE.</span>
+        </h2>
+
+        <p>
+          Want to learn more about V.I.P. before you book? Visit the Google Business Profile to see reviews, photos and current business details.
+        </p>
+
+      </div>
+
+      <div class="fp-google-profile-card">
+
+        <div class="fp-google-profile-brand" aria-label="Google">
+          <span class="google-blue">G</span>
+          <span class="google-red">o</span>
+          <span class="google-yellow">o</span>
+          <span class="google-blue">g</span>
+          <span class="google-green">l</span>
+          <span class="google-red">e</span>
+        </div>
+
+        <strong>V.I.P. Junk Removal LLC</strong>
+
+        <p>
+          Reviews, photos and company information in one place.
+        </p>
+
+        <a
+          href="https://share.google/Ld9O3vo8Pq6ypLrJB"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fp-google-profile-btn"
+        >
+          VISIT OUR GOOGLE BUSINESS PROFILE
+          <span>↗</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FINAL CTA
+  ====================================================== -->
+  <section class="fp-final-cta">
+
+    <div class="fp-final-photo"></div>
+    <div class="fp-final-shade"></div>
+
+    <div class="fp-shell fp-final-inner">
+
+      <p>
+        READY TO CLEAR IT OUT?
+      </p>
+
+      <h2>
+        READY FOR THE JUNK
+        <span>TO DISAPPEAR?</span>
+      </h2>
+
+      <a href="#quote" class="fp-green-btn fp-big-btn">
+        GET YOUR FREE ESTIMATE
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="fp-footer">
+
+    <div class="fp-shell fp-footer-grid">
+
+      <div class="fp-footer-brand">
+
+        <!-- V.I.P. WORDMARK -->
+        <span class="fp-wordmark fp-wordmark-footer" aria-label="VIP Junk Removal"><strong>V.I.P.</strong><small>JUNK REMOVAL</small></span>
+
+        <p>
+          Full-service junk removal and cleanouts serving North and Central New Jersey, with availability based on location and schedule.
+        </p>
+
+      </div>
+
+
+      <div class="fp-footer-links">
+
+        <h4>SERVICES</h4>
+
+        <a href="#services">
+          Furniture Removal
+        </a>
+
+        <a href="#services">
+          Garage Cleanouts
+        </a>
+
+        <a href="#services">
+          Property Cleanups
+        </a>
+
+        <a href="#services">
+          Light Demolition
+        </a>
+
+      </div>
+
+
+      <div class="fp-footer-links">
+
+        <h4>COMPANY</h4>
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#reviews">
+          Reviews
+        </a>
+
+        <a href="#pricing">
+          Pricing
+        </a>
+
+        <a href="#quote">
+          Contact
+        </a>
+
+      </div>
+
+
+      <div class="fp-footer-quote">
+
+        <h4>
+          READY TO GET STARTED?
+        </h4>
+
+        <p>
+          East Orange, NJ • (973) 810-6234<br>
+          admin@vipjunkremovalnj.com
+        </p>
+
+        <a href="#quote">
+          GET A FREE ESTIMATE
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="fp-shell fp-footer-bottom">
+
+      ©
+      <span id="fpYear"></span>
+      V.I.P. Junk Removal LLC.
+      All Rights Reserved.
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- MOBILE CTA -->
+  <div class="fp-mobile-bottom">
+
+    <a href="#quote">
+      GET A FREE ESTIMATE
+    </a>
+
+  </div>
+
+
+  <iframe
+    name="fpWebhookReceiver"
+    id="fpWebhookReceiver"
+    style="display:none;"
+    title="Form submission"
+  ></iframe>
+
+</div>
+
+
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
+
+
+
+
+
+
+<script>
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function fpToggleMenu() {
+
+  const menu =
+    document.getElementById(
+      "fpMobileMenu"
+    );
+
+
+  if (!menu) return;
+
+
+  menu.classList.toggle(
+    "open"
+  );
+
+}
+
+
+function fpCloseMenu() {
+
+  const menu =
+    document.getElementById(
+      "fpMobileMenu"
+    );
+
+
+  if (!menu) return;
+
+
+  menu.classList.remove(
+    "open"
+  );
+
+
+  menu.querySelectorAll(
+    ".fp-mobile-submenu"
+  ).forEach(function (submenu) {
+    submenu.classList.remove("open");
+  });
+
+
+  menu.querySelectorAll(
+    ".fp-mobile-submenu-toggle"
+  ).forEach(function (button) {
+    button.classList.remove("open");
+  });
+
+}
+
+
+function fpToggleMobileSubmenu(id, button) {
+
+  const submenu =
+    document.getElementById(id);
+
+  if (!submenu) return;
+
+  submenu.classList.toggle("open");
+
+  if (button) {
+    button.classList.toggle("open");
+  }
+
+}
+
+
+
+/* =========================================================
+   STICKY HEADER
+========================================================= */
+
+(function () {
+
+  const header =
+    document.getElementById(
+      "fpHeader"
+    );
+
+
+  if (!header) return;
+
+
+  function updateHeader() {
+
+    if (
+      window.scrollY > 100
+    ) {
+
+      header.classList.add(
+        "fp-sticky"
+      );
+
+    } else {
+
+      header.classList.remove(
+        "fp-sticky"
+      );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    updateHeader,
+    {
+      passive: true
+    }
+  );
+
+
+  updateHeader();
+
+})();
+
+
+
+/* =========================================================
+   BEFORE / AFTER
+========================================================= */
+
+(function () {
+
+  const range =
+    document.getElementById(
+      "fpRange"
+    );
+
+
+  const beforeImage =
+    document.getElementById(
+      "fpBeforeImage"
+    );
+
+
+  const line =
+    document.getElementById(
+      "fpBaLine"
+    );
+
+
+  if (
+    !range ||
+    !beforeImage ||
+    !line
+  ) {
+
+    return;
+
+  }
+
+
+  function updateSlider() {
+
+    const value =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(range.value)
+        )
+      );
+
+
+    const position =
+      value + "%";
+
+
+    const slider =
+      document.getElementById(
+        "fpSlider"
+      );
+
+
+    if (
+      slider
+    ) {
+
+      slider.style.setProperty(
+        "--fp-ba-position",
+        position
+      );
+
+    }
+
+
+    /* The photos never translate or resize.
+       Only the reveal mask and divider position update. */
+
+    beforeImage.style.clipPath = "";
+    beforeImage.style.webkitClipPath = "";
+
+    line.style.left = "";
+
+  }
+
+
+  range.addEventListener(
+    "input",
+    updateSlider
+  );
+
+
+  range.addEventListener(
+    "change",
+    updateSlider
+  );
+
+
+  updateSlider();
+
+})();
+
+
+
+/* =========================================================
+   QUIZ FUNNEL
+========================================================= */
+
+(function () {
+
+  const root =
+    document.getElementById(
+      "vip-pro"
+    );
+
+
+  if (!root) {
+    return;
+  }
+
+
+  const FP_GHL_WEBHOOK = ""; // Add the V.I.P. GHL webhook here before launch.
+
+
+  const answers = {
+
+    junk_type: "",
+    junk_amount: "",
+    junk_location: "",
+    timeline: "",
+    budget_preference:
+      "Best Overall Value"
+
+  };
+
+
+  let currentScreen = 0;
+  let submitted = false;
+
+
+  const quizScreens =
+    Array.from(
+      root.querySelectorAll(
+        ".fp-quiz-screen"
+      )
+    );
+
+
+  const progress =
+    document.querySelector(
+      ".fp-quiz-progress"
+    );
+
+
+  const progressFill =
+    document.getElementById(
+      "fpQuizProgressFill"
+    );
+
+
+  const progressText =
+    document.getElementById(
+      "fpQuizProgressText"
+    );
+
+
+  const progressPercent =
+    document.getElementById(
+      "fpQuizProgressPercent"
+    );
+
+
+
+  /* SCREEN CONTROL */
+
+  function showQuizScreen(
+    index
+  ) {
+
+    currentScreen =
+      index;
+
+
+    quizScreens.forEach(
+      function (
+        screen
+      ) {
+
+        screen.classList.toggle(
+          "active",
+          Number(
+            screen.dataset.fpScreen
+          ) ===
+          index
+        );
+
+      }
+    );
+
+
+    updateProgress();
+
+
+  }
+
+
+
+  /* PROGRESS */
+
+  function updateProgress() {
+
+    if (
+      currentScreen >= 6
+    ) {
+
+      progress.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    progress.style.display =
+      "block";
+
+
+    let step =
+      currentScreen + 1;
+
+
+    if (
+      currentScreen === 5
+    ) {
+
+      step = 6;
+
+    }
+
+
+    const percentage =
+      Math.round(
+        (
+          step / 6
+        ) * 100
+      );
+
+
+    progressFill.style.width =
+      percentage + "%";
+
+
+    if (
+      currentScreen < 5
+    ) {
+
+      progressText.textContent =
+        "Question " +
+        (
+          currentScreen + 1
+        ) +
+        " of 5";
+
+    } else {
+
+      progressText.textContent =
+        "Final Step";
+
+    }
+
+
+    progressPercent.textContent =
+      percentage +
+      "% COMPLETE";
+
+  }
+
+
+
+  /* ANSWERS */
+
+  const answerGroups =
+    root.querySelectorAll(
+      ".fp-quiz-answer-grid[data-fp-question]"
+    );
+
+
+  answerGroups.forEach(
+    function (
+      group
+    ) {
+
+      const question =
+        group.dataset.fpQuestion;
+
+
+      const buttons =
+        group.querySelectorAll(
+          ".fp-quiz-answer"
+        );
+
+
+      buttons.forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              buttons.forEach(
+                function (
+                  other
+                ) {
+
+                  other.classList.remove(
+                    "selected"
+                  );
+
+                }
+              );
+
+
+              button.classList.add(
+                "selected"
+              );
+
+
+              answers[
+                question
+              ] =
+                button.dataset.value || "";
+
+
+              setTimeout(
+                function () {
+
+                  if (
+                    currentScreen < 4
+                  ) {
+
+                    showQuizScreen(
+                      currentScreen + 1
+                    );
+
+                  }
+
+                },
+                160
+              );
+
+            }
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+  /* BACK BUTTONS */
+
+  root
+    .querySelectorAll(
+      ".fp-quiz-back[data-fp-back]"
+    )
+    .forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            const target =
+              Number(
+                button.dataset.fpBack
+              );
+
+
+            if (
+              Number.isFinite(
+                target
+              )
+            ) {
+
+              showQuizScreen(
+                target
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+
+  /* BUDGET */
+
+  const budgetSlider =
+    document.getElementById(
+      "fpBudgetSlider"
+    );
+
+
+  const budgetTitle =
+    document.getElementById(
+      "fpBudgetTitle"
+    );
+
+
+  const budgetDescription =
+    document.getElementById(
+      "fpBudgetDescription"
+    );
+
+
+  const budgetIcon =
+    document.getElementById(
+      "fpBudgetIcon"
+    );
+
+
+  const budgetContinue =
+    document.getElementById(
+      "fpBudgetContinue"
+    );
+
+
+  function getBudgetInfo(
+    value
+  ) {
+
+    value =
+      Number(value);
+
+
+    if (
+      value <= 24
+    ) {
+
+      return {
+
+        title:
+          "Keep It Economical",
+
+        description:
+          "You're focused on keeping the job as cost-conscious as possible and may be flexible on timing or convenience.",
+
+        icon:
+          "💵"
+
+      };
+
+    }
+
+
+    if (
+      value <= 49
+    ) {
+
+      return {
+
+        title:
+          "Best Overall Value",
+
+        description:
+          "A fair balance between price, convenience and having the heavy work handled for you.",
+
+        icon:
+          "⚖️"
+
+      };
+
+    }
+
+
+    if (
+      value <= 74
+    ) {
+
+      return {
+
+        title:
+          "Convenience First",
+
+        description:
+          "You value having the lifting, loading and removal handled with as little hassle on your end as possible.",
+
+        icon:
+          "✨"
+
+      };
+
+    }
+
+
+    return {
+
+      title:
+        "Priority Service",
+
+      description:
+        "You care most about getting the job handled quickly and easily with maximum convenience.",
+
+      icon:
+        "⚡"
+
+    };
+
+  }
+
+
+  function updateBudget() {
+
+    const value =
+      Number(
+        budgetSlider.value
+      );
+
+
+    const info =
+      getBudgetInfo(
+        value
+      );
+
+
+    answers.budget_preference =
+      info.title;
+
+
+    budgetTitle.textContent =
+      info.title;
+
+
+    budgetDescription.textContent =
+      info.description;
+
+
+    budgetIcon.textContent =
+      info.icon;
+
+
+    budgetSlider.style.setProperty(
+      "--fp-budget-position",
+      value + "%"
+    );
+
+  }
+
+
+  if (
+    budgetSlider
+  ) {
+
+    budgetSlider.addEventListener(
+      "input",
+      updateBudget
+    );
+
+
+    updateBudget();
+
+  }
+
+
+  if (
+    budgetContinue
+  ) {
+
+    budgetContinue.addEventListener(
+      "click",
+      function () {
+
+        showQuizScreen(
+          5
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* VALIDATION */
+
+  const leadForm =
+    document.getElementById(
+      "fpLeadForm"
+    );
+
+
+  const submitButton =
+    document.getElementById(
+      "fpQuizSubmit"
+    );
+
+
+  function validateForm() {
+
+    const fields = [
+
+      document.getElementById(
+        "fpFirstName"
+      ),
+
+      document.getElementById(
+        "fpLastName"
+      ),
+
+      document.getElementById(
+        "fpPhone"
+      ),
+
+      document.getElementById(
+        "fpEmail"
+      ),
+
+      document.getElementById(
+        "fpZip"
+      )
+
+    ];
+
+
+    let valid = true;
+
+
+    fields.forEach(
+      function (
+        field
+      ) {
+
+        field.classList.remove(
+          "invalid"
+        );
+
+
+        if (
+          !field.value.trim()
+        ) {
+
+          field.classList.add(
+            "invalid"
+          );
+
+
+          valid = false;
+
+        }
+
+      }
+    );
+
+
+    const email =
+      document.getElementById(
+        "fpEmail"
+      );
+
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (
+      email.value.trim() &&
+      !emailPattern.test(
+        email.value.trim()
+      )
+    ) {
+
+      email.classList.add(
+        "invalid"
+      );
+
+
+      valid = false;
+
+    }
+
+
+    return valid;
+
+  }
+
+
+  root
+    .querySelectorAll(
+      ".fp-contact-field input"
+    )
+    .forEach(
+      function (
+        input
+      ) {
+
+        input.addEventListener(
+          "input",
+          function () {
+
+            input.classList.remove(
+              "invalid"
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+
+  /* LEAD DATA */
+
+  function getLeadData() {
+
+    const search =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    return {
+
+      first_name:
+        document
+          .getElementById(
+            "fpFirstName"
+          )
+          .value
+          .trim(),
+
+      last_name:
+        document
+          .getElementById(
+            "fpLastName"
+          )
+          .value
+          .trim(),
+
+      phone:
+        document
+          .getElementById(
+            "fpPhone"
+          )
+          .value
+          .trim(),
+
+      email:
+        document
+          .getElementById(
+            "fpEmail"
+          )
+          .value
+          .trim(),
+
+      zip:
+        document
+          .getElementById(
+            "fpZip"
+          )
+          .value
+          .trim(),
+
+      junk_type:
+        answers.junk_type,
+
+      junk_amount:
+        answers.junk_amount,
+
+      junk_location:
+        answers.junk_location,
+
+      timeline:
+        answers.timeline,
+
+      budget_preference:
+        answers.budget_preference,
+
+      source:
+        "V.I.P. Website Quiz",
+
+      funnel:
+        "V.I.P. Junk Removal Quote",
+
+      page_url:
+        window.location.href,
+
+      utm_source:
+        search.get(
+          "utm_source"
+        ) || "",
+
+      utm_medium:
+        search.get(
+          "utm_medium"
+        ) || "",
+
+      utm_campaign:
+        search.get(
+          "utm_campaign"
+        ) || "",
+
+      utm_content:
+        search.get(
+          "utm_content"
+        ) || "",
+
+      fbclid:
+        search.get(
+          "fbclid"
+        ) || "",
+
+      submitted_at:
+        new Date().toISOString()
+
+    };
+
+  }
+
+
+
+  /* WEBHOOK */
+
+  function sendToWebhook(
+    lead
+  ) {
+
+    if (
+      !FP_GHL_WEBHOOK
+    ) {
+
+      console.log(
+        "V.I.P. quiz lead:",
+        lead
+      );
+
+
+      return;
+
+    }
+
+
+    const form =
+      document.createElement(
+        "form"
+      );
+
+
+    form.method =
+      "POST";
+
+
+    form.action =
+      FP_GHL_WEBHOOK;
+
+
+    form.target =
+      "fpWebhookReceiver";
+
+
+    form.style.display =
+      "none";
+
+
+    Object.keys(
+      lead
+    ).forEach(
+      function (
+        key
+      ) {
+
+        const input =
+          document.createElement(
+            "input"
+          );
+
+
+        input.type =
+          "hidden";
+
+
+        input.name =
+          key;
+
+
+        input.value =
+          lead[key] == null
+            ? ""
+            : String(
+                lead[key]
+              );
+
+
+        form.appendChild(
+          input
+        );
+
+      }
+    );
+
+
+    document.body.appendChild(
+      form
+    );
+
+
+    form.submit();
+
+
+    setTimeout(
+      function () {
+
+        form.remove();
+
+      },
+      1500
+    );
+
+  }
+
+
+
+  /* FINAL SUBMIT */
+
+  if (
+    leadForm
+  ) {
+
+    leadForm.addEventListener(
+      "submit",
+      function (
+        event
+      ) {
+
+        event.preventDefault();
+
+
+        if (
+          submitted
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          !validateForm()
+        ) {
+
+          return;
+
+        }
+
+
+        submitted = true;
+
+
+        submitButton.disabled =
+          true;
+
+
+        submitButton.textContent =
+          "SENDING REQUEST...";
+
+
+        const lead =
+          getLeadData();
+
+
+        sendToWebhook(
+          lead
+        );
+
+
+        try {
+
+          localStorage.setItem(
+            "vip_junk_removal_lead",
+            JSON.stringify(
+              lead
+            )
+          );
+
+        } catch (
+          error
+        ) {}
+
+
+        setTimeout(
+          function () {
+
+            showQuizScreen(
+              6
+            );
+
+          },
+          450
+        );
+
+      }
+    );
+
+  }
+
+
+  updateProgress();
+
+})();
+
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const year =
+      document.getElementById(
+        "fpYear"
+      );
+
+
+    if (
+      year
+    ) {
+
+      year.textContent =
+        new Date()
+          .getFullYear();
+
+    }
+
+  }
+);
+
+</script>
