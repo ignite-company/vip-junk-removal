@@ -1,0 +1,34 @@
+name: Apply VIP mobile optimization
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-mobile-optimization.yml'
+      - 'scripts/apply_mobile_optimization.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Apply mobile optimization
+        run: python3 scripts/apply_mobile_optimization.py
+
+      - name: Commit optimized pages
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' '*/index.html'
+          git commit -m "Optimize VIP site for mobile [mobile-optimized]"
+          git push
