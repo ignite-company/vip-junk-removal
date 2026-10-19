@@ -4123,6 +4123,11 @@ body:has(#vip-pro) .inner {
     bottom: 0;
 
     display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(100% + 12px));
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
 
     padding:
       9px
@@ -7391,7 +7396,7 @@ body:has(#vip-pro) .inner {
 
 
   <!-- MOBILE CTA -->
-  <div class="fp-mobile-bottom">
+  <div class="fp-mobile-bottom" aria-hidden="true">
 
     <a href="#quote">
       GET A FREE ESTIMATE
@@ -8657,6 +8662,60 @@ document.addEventListener(
   .fp-hero-quiz{margin-bottom:24px !important}
 }
 </style>
+
+<style id="vip-mobile-header-and-scroll-cta">
+/* Match the iPhone safe-area canvas to the purple mobile header. */
+@media (max-width: 820px) {
+  html, body { background: #25103F !important; }
+  .fp-mobile-bottom.vip-cta-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+</style>
+<script>
+/* Reveal the mobile estimate bar once the 5-star feedback section is reached. */
+(function () {
+  function initVipMobileScrollCta() {
+    var cta = document.querySelector(".fp-mobile-bottom");
+    var reviews = document.getElementById("reviews");
+    if (!cta || !reviews) return;
+
+    var mobile = window.matchMedia("(max-width: 820px)");
+    var scheduled = false;
+
+    function update() {
+      scheduled = false;
+      // The reviews section follows the hero quiz directly.
+      var triggerLine = window.innerHeight * 0.8;
+      var show = mobile.matches && reviews.getBoundingClientRect().top <= triggerLine;
+      cta.classList.toggle("vip-cta-visible", show);
+      cta.setAttribute("aria-hidden", String(!show));
+    }
+
+    function requestUpdate() {
+      if (scheduled) return;
+      scheduled = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate, { passive: true });
+    window.addEventListener("pageshow", requestUpdate);
+    if (mobile.addEventListener) mobile.addEventListener("change", requestUpdate);
+    else if (mobile.addListener) mobile.addListener(requestUpdate);
+    update();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVipMobileScrollCta, { once: true });
+  } else {
+    initVipMobileScrollCta();
+  }
+})();
+</script>
 
 </body>
 </html>
