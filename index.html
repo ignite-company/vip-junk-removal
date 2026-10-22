@@ -902,10 +902,84 @@ body:has(#vip-pro) .inner {
 }
 
 
-.fp-about-photo img {
+.fp-about-photo video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background: #10191a;
+}
+
+.fp-about-photo video.fp-about-video-playing {
+  object-fit: contain;
+}
+
+.fp-about-photo {
+  position: relative;
+}
+
+.fp-about-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.fp-about-play[hidden] {
+  display: none;
+}
+
+.fp-about-play-icon {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--navy-black);
+  border: 5px solid rgba(255,255,255,.9);
+  box-shadow: 0 10px 35px rgba(0,0,0,.33);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.fp-about-play:hover .fp-about-play-icon,
+.fp-about-play:focus-visible .fp-about-play-icon {
+  transform: scale(1.08);
+  box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.fp-about-play:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 7px;
+  border-radius: 8px;
+}
+
+.fp-about-play-label {
+  padding: 7px 13px;
+  border-radius: 30px;
+  background: rgba(0,0,0,.66);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .fp-about-play-icon {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 
@@ -5599,7 +5673,13 @@ body:has(#vip-pro) .inner {
   <section class="fp-about" id="about">
     <div class="fp-shell fp-about-grid">
       <div class="fp-about-visual">
-        <div class="fp-about-photo"><img src="https://junkremovalvip.com/cdn/shop/files/IMG_1965.heic?v=1762655709&width=1800&format=pjpg" alt="V.I.P. Junk Removal truck on a New Jersey cleanout job"></div>
+        <div class="fp-about-photo">
+          <video id="fpAboutVideo" src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ada9bd74fa20bea30c0d4ce.mp4#t=0.1" preload="metadata" playsinline aria-label="V.I.P. Junk Removal team video"></video>
+          <button type="button" class="fp-about-play" id="fpAboutPlay" aria-label="Play V.I.P. Junk Removal video">
+            <span class="fp-about-play-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+            <span class="fp-about-play-label">WATCH OUR CREW</span>
+          </button>
+        </div>
         <div class="fp-about-badge"><strong>V<span class="vip-dot">.</span>I<span class="vip-dot">.</span>P<span class="vip-dot">.</span></strong><span>JUNK REMOVAL</span></div>
       </div>
       <div class="fp-about-copy">
@@ -5612,6 +5692,31 @@ body:has(#vip-pro) .inner {
     </div>
     <div class="fp-shell fp-about-bottom"><p>A local V.I.P. crew focused on making the entire cleanout process simple, from the first call to the final sweep.</p></div>
   </section>
+  <script>
+  (function () {
+    const video = document.getElementById('fpAboutVideo');
+    const playButton = document.getElementById('fpAboutPlay');
+    if (!video || !playButton) return;
+
+    function syncVideoState() {
+      const playing = !video.paused && !video.ended;
+      playButton.hidden = playing;
+      video.classList.toggle('fp-about-video-playing', playing);
+    }
+
+    playButton.addEventListener('click', function () {
+      video.controls = true;
+      const playRequest = video.play();
+      if (playRequest && typeof playRequest.catch === 'function') {
+        playRequest.catch(syncVideoState);
+      }
+    });
+
+    video.addEventListener('play', syncVideoState);
+    video.addEventListener('pause', syncVideoState);
+    video.addEventListener('ended', syncVideoState);
+  })();
+  </script>
 
 
 
